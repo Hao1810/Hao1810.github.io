@@ -113,12 +113,55 @@
         .placeholder-page p { color: #333; }
         @media (max-width: 768px) { .feature-section, .feature-section:nth-child(even) { flex-direction: column; } }
         
-        /* --- RENT PAGE BUTTON --- */
-        .post-item-btn { position: fixed; bottom: 110px; right: 40px; width: 70px; height: 70px; background-color: var(--primary-color); color: var(--light-text); border: none; border-radius: 35px; font-size: 28px; display: flex; justify-content: flex-end; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1001; overflow: hidden; transition: width 0.4s ease-in-out; }
-        .post-item-btn:hover { width: 220px; }
-        .post-item-btn .btn-icon { font-size: 28px; width: 70px; height: 70px; display: flex; justify-content: center; align-items: center; position: absolute; right: 0; top: 0; transition: transform 0.4s ease; }
-        .post-item-btn .btn-text { white-space: nowrap; font-size: 1.2rem; font-weight: bold; opacity: 0; transition: opacity 0.3s ease-in-out 0.1s; padding-right: 80px; }
-        .post-item-btn:hover .btn-text { opacity: 1; }
+        /* --- NEW: RENT PAGE BUTTON (Floating Action Button) --- */
+        .post-item-btn { 
+            position: fixed; 
+            bottom: 40px; 
+            right: 40px; 
+            width: 70px; 
+            height: 70px; 
+            background-color: var(--primary-color); 
+            color: var(--light-text); 
+            border: none; 
+            border-radius: 35px; 
+            font-size: 28px; 
+            display: flex; 
+            justify-content: flex-end; 
+            align-items: center; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            cursor: pointer; 
+            z-index: 1001; 
+            overflow: hidden; 
+            transition: width 0.4s ease-in-out, transform 0.2s; 
+        }
+        .post-item-btn:hover { 
+            width: 220px; 
+            transform: scale(1.05);
+        }
+        .post-item-btn .btn-icon { 
+            font-size: 28px; 
+            width: 70px; 
+            height: 70px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            position: absolute; 
+            right: 0; 
+            top: 0; 
+            transition: transform 0.4s ease; 
+        }
+        .post-item-btn .btn-text { 
+            white-space: nowrap; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            opacity: 0; 
+            transition: opacity 0.3s ease-in-out 0.1s; 
+            padding-right: 80px; 
+        }
+        .post-item-btn:hover .btn-text { 
+            opacity: 1; 
+        }
+
 
         /* --- LOGIN & REGISTER PAGE STYLES --- */
         #page8 { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 40px 20px; }
@@ -129,7 +172,10 @@
         .form-toggle button { flex: 1; padding: 15px; border: none; background-color: transparent; font-weight: bold; font-size: 1rem; cursor: pointer; transition: all 0.3s; color: #333; }
         .form-toggle button.active { background-color: var(--primary-color); color: var(--light-text); }
         .form-wrapper h2 { color: var(--primary-color); margin-bottom: 20px; }
-        .social-login .social-btn { padding: 12px; margin-bottom: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; transition: opacity 0.3s; }
+        
+        /* --- NEW: SOCIAL LOGIN & DIVIDER STYLES --- */
+        .social-login { margin-bottom: 20px; }
+        .social-login .social-btn { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border:none; text-decoration: none; font-weight: bold; color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; transition: opacity 0.3s; cursor: pointer; font-size: 1rem; }
         .social-login .social-btn:hover { opacity: 0.9; }
         .social-btn i { font-size: 1.2rem; }
         .social-btn.facebook { background-color: #3b5998; }
@@ -137,58 +183,18 @@
         .divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: #aaa; }
         .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #ddd; }
         .divider p { margin: 0 15px; font-weight: bold; }
+
         .form-wrapper form input { width: calc(100% - 24px); padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         .forgot-password { display: block; text-align: right; margin-bottom: 20px; color: var(--primary-color); text-decoration: none; font-size: 0.9rem; }
         .submit-btn { width: 100%; padding: 15px; border: none; background-color: var(--primary-color); color: var(--light-text); border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: opacity 0.3s; }
         .submit-btn:hover { opacity: 0.9; }
 
         /* --- FLOATING CHAT WIDGET STYLES --- */
-        #floating-chat-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 2000;
-        }
-        #chat-toggle-btn {
-            background-color: var(--primary-color);
-            color: var(--light-text);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: none;
-            font-size: 28px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-            cursor: pointer;
-            transition: transform 0.2s ease-out;
-        }
-        #chat-toggle-btn:hover {
-            transform: scale(1.1);
-        }
-        #chat-window {
-            position: absolute;
-            bottom: 80px; /* Position above the toggle button */
-            right: 0;
-            width: 370px;
-            height: 500px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            /* Animation */
-            transform-origin: bottom right;
-            transform: scale(0);
-            opacity: 0;
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-        }
-        #chat-window.visible {
-            transform: scale(1);
-            opacity: 1;
-        }
+        #floating-chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 2000; }
+        #chat-toggle-btn { background-color: var(--primary-color); color: var(--light-text); width: 60px; height: 60px; border-radius: 50%; border: none; font-size: 28px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.25); cursor: pointer; transition: transform 0.2s ease-out; }
+        #chat-toggle-btn:hover { transform: scale(1.1); }
+        #chat-window { position: absolute; bottom: 80px; /* Position above the toggle button */ right: 0; width: 370px; height: 500px; background: white; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.2); display: flex; flex-direction: column; overflow: hidden; /* Animation */ transform-origin: bottom right; transform: scale(0); opacity: 0; transition: transform 0.3s ease-out, opacity 0.3s ease-out; }
+        #chat-window.visible { transform: scale(1); opacity: 1; }
         .chat-header { position: relative; padding: 15px; background-color: var(--primary-color); color: var(--light-text); font-weight: bold; font-size: 1.1rem; text-align: center; }
         .chat-close-btn { position: absolute; top: 50%; right: 15px; transform: translateY(-50%); background: none; border: none; color: var(--light-text); font-size: 2rem; line-height: 1; cursor: pointer; opacity: 0.8; }
         .chat-close-btn:hover { opacity: 1; }
@@ -233,111 +239,98 @@
 
         /* --- 3  COLUMNS SET UP --- */
         .rent-page-container {
-    padding: 20px 5%; /* Add some padding */
-}
-
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.shopping-cart-button {
-    position: relative;
-    font-size: 2rem;
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-#cart-item-count {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background-color: var(--blue);
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-.product-box {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-}
-
-.product-image {
-    width: 100%;
-    height: 250px;
-    background-size: cover;
-    background-position: center;
-}
-
-.product-info {
-    padding: 15px;
-    text-align: left;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-name {
-    font-size: 1.2rem;
-    margin: 0 0 10px 0;
-    color: #333;
-}
-
-.product-price {
-    font-size: 1rem;
-    color: var(--primary-color);
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.add-to-cart-btn {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: var(--primary-color);
-    color: var(--light-text);
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: auto; /* Pushes button to the bottom */
-    transition: background-color 0.3s;
-}
-
-.add-to-cart-btn:hover {
-    opacity: 0.9;
-}
-
-@media (max-width: 992px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-}
+            padding: 20px 5%; /* Add some padding */
+        }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .shopping-cart-button {
+            position: relative;
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        #cart-item-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: var(--blue);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .product-box {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+        .product-info {
+            padding: 15px;
+            text-align: left;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-name {
+            font-size: 1.2rem;
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .product-price {
+            font-size: 1rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: auto; /* Pushes button to the bottom */
+            transition: background-color 0.3s;
+        }
+        .add-to-cart-btn:hover {
+            opacity: 0.9;
+        }
+        @media (max-width: 992px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ======== ALL HTML SECTIONS ARE HERE, UNCHANGED FROM YOUR CODE ======== -->
+    <!-- ======== ALL HTML SECTIONS ARE HERE ======== -->
     <div id="page1">
         <div class="welcome-container">
             <div class="language-selector"><a class="lang-btn" data-lang="en">EN</a> | <a class="lang-btn active" data-lang="vi">VI</a></div>
@@ -405,7 +398,6 @@
     </div>
     <div id="page4" class="page-content hidden"> <div class="placeholder-page"><h1 data-lang-key="connect"></h1><p data-lang-key="comingSoon"></p></div> </div>
     
-    <!-- PAGE 5 HAS BEEN MODIFIED TO BE DYNAMIC -->
     <div id="page5" class="page-content hidden">
         <div class="rent-page-container">
             <div class="page-header">
@@ -415,45 +407,64 @@
                     <span id="cart-item-count">0</span>
                 </a>
             </div>
-            <!-- This div is now a placeholder. JavaScript will fill it with products from Firebase. -->
             <div id="product-grid" class="product-grid"></div>
         </div>
-        <!-- This button will be shown/hidden by JavaScript based on login status -->
-        <button id="post-item-button" class="post-item-btn hidden" aria-label="Post new item"> 
-            <span class="btn-text" data-lang-key="forSale">Đăng bán</span>
-            <i class="fas fa-plus btn-icon"></i> 
-        </button>
     </div>
+    <!-- NEW: Floating Action Button to Add Items -->
+    <button id="post-item-button" class="post-item-btn hidden" aria-label="Post new item"> 
+        <span class="btn-text" data-lang-key="forSale">Đăng bán</span>
+        <i class="fas fa-plus btn-icon"></i> 
+    </button>
 
     <div id="page6" class="page-content hidden"> <div class="placeholder-page"><h1 data-lang-key="handbook"></h1><p data-lang-key="comingSoon"></p></div> </div>
     
-    <!-- PAGE 8 - LOGIN/REGISTER FORMS -->
+    <!-- PAGE 8 - LOGIN/REGISTER FORMS (MODIFIED) -->
     <div id="page8" class="page-content hidden">
         <div class="form-wrapper">
             <a href="#" id="close-login-page-btn" class="close-form-btn" title="Go Back">×</a>
             <div class="form-toggle">
-                <button id="show-login-btn" class="active">Login</button>
-                <button id="show-register-btn">Register</button>
+                <button id="show-login-btn" class="active">Đăng nhập</button>
+                <button id="show-register-btn">Đăng ký</button>
             </div>
-            <!-- Login form now has name attributes -->
-            <form id="login-form">
-                <h2>Login to your Account</h2>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <a href="#" class="forgot-password">Forgot Password?</a>
-                <button type="submit" class="submit-btn">Login</button>
-            </form>
-            <!-- Register form now has name attributes -->
-            <form id="register-form" class="hidden">
-                <h2>Create New Account</h2>
-                <input type="email" name="email" placeholder="Email Address" required>
-                <input type="password" name="password" placeholder="Create Password" required>
-                <button type="submit" class="submit-btn">Register</button>
-            </form>
+
+            <!-- Login Form (MODIFIED) -->
+            <div id="login-form-container">
+                <h2>Đăng nhập vào tài khoản</h2>
+                <!-- NEW: Social Login Buttons -->
+                <div class="social-login">
+                    <button id="google-login-btn" class="social-btn google"><i class="fab fa-google"></i> Đăng nhập với Google</button>
+                    <button id="facebook-login-btn" class="social-btn facebook"><i class="fab fa-facebook-f"></i> Đăng nhập với Facebook</button>
+                </div>
+                <div class="divider"><p>HOẶC</p></div>
+                <!-- Original Email Form -->
+                <form id="login-form">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Mật khẩu" required>
+                    <a href="#" class="forgot-password">Quên mật khẩu?</a>
+                    <button type="submit" class="submit-btn">Đăng nhập</button>
+                </form>
+            </div>
+
+            <!-- Register Form (MODIFIED) -->
+            <div id="register-form-container" class="hidden">
+                 <h2>Tạo tài khoản mới</h2>
+                 <!-- NEW: Social Login Buttons -->
+                <div class="social-login">
+                    <button id="google-register-btn" class="social-btn google"><i class="fab fa-google"></i> Đăng ký với Google</button>
+                    <button id="facebook-register-btn" class="social-btn facebook"><i class="fab fa-facebook-f"></i> Đăng ký với Facebook</button>
+                </div>
+                <div class="divider"><p>HOẶC</p></div>
+                 <!-- Original Email Form -->
+                <form id="register-form">
+                    <input type="email" name="email" placeholder="Địa chỉ Email" required>
+                    <input type="password" name="password" placeholder="Tạo mật khẩu" required>
+                    <button type="submit" class="submit-btn">Đăng ký</button>
+                </form>
+            </div>
         </div>
     </div>
     
-    <!-- ADD ITEM MODAL - MODIFIED WITH NAME ATTRIBUTES -->
+    <!-- ADD ITEM MODAL -->
     <div id="add-item-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -501,11 +512,9 @@
     </div>
 
 
-    <!-- =================================================================== -->
-    <!-- ====================== NEW JAVASCRIPT SECTION ===================== -->
-    <!-- =================================================================== -->
+    <!-- ========================== JAVASCRIPT SECTION ======================== -->
 
-    <!-- Firebase SDKs - These must be included before your main script -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
@@ -513,56 +522,41 @@
 
     <script>
         // --- 1. FIREBASE SETUP ---
-        // IMPORTANT: PASTE YOUR FIREBASE CONFIG OBJECT FROM THE FIREBASE CONSOLE HERE
-    // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDTa9lu-HcrhdkiQXHa9-E0Glj_7f6rnRc",
-  authDomain: "mam-2-c06f4.firebaseapp.com",
-  projectId: "mam-2-c06f4",
-  storageBucket: "mam-2-c06f4.firebasestorage.app",
-  messagingSenderId: "494501201303",
-  appId: "1:494501201303:web:f32f75d93042964ae5f0d2",
-  measurementId: "G-56FZ0TK2FP"
-};
+        const firebaseConfig = {
+          apiKey: "AIzaSyDTa9lu-HcrhdkiQXHa9-E0Glj_7f6rnRc",
+          authDomain: "mam-2-c06f4.firebaseapp.com",
+          projectId: "mam-2-c06f4",
+          storageBucket: "mam-2-c06f4.appspot.com",
+          messagingSenderId: "494501201303",
+          appId: "1:494501201303:web:f32f75d93042964ae5f0d2",
+          measurementId: "G-56FZ0TK2FP"
+        };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
-        // Get references to the Firebase services we will use
         const auth = firebase.auth();
         const db = firebase.firestore();
         const storage = firebase.storage();
+        
+        // NEW: Social Login Providers
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+        const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-        // --- 2. YOUR ORIGINAL UI/UX LOGIC (WITH MINOR CHANGES) ---
+
+        // --- 2. YOUR ORIGINAL UI/UX LOGIC ---
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Your original language translation and typing effect code ---
+            // --- Language translation and typing effect code ---
             const translations = {
                 en: {
                     slogan: "The first buds of life, enough milk - enough things - enough love", start: "Start", about: "About Us", connect: "Connecting breast milk", rent: "Rent - Pass items", handbook: "Parenting handbook", scan: "AI Consultant", login: "Login", register: "Register", discovery: "discovery", aboutText1: "Recently, many women have poor health leading to insufficient milk supply, poor quality, and lack of quality milk for their children to drink, and the problem of fake milk. Parents lack knowledge when raising children for the first time, lack experience, limited economic conditions, children grow up quickly, so the time to use items is short, causing waste. Mothers with excess milk, and parents with low economic conditions do not have enough money to buy enough for their children.", scrollBanner: "măm accompanying baby and parents • ", aboutText2: "Understanding that psychology, we want to create a website to help parents solve problems, connect them with each other, guide them to a more correct and gentle path of raising children.", contactUs: "Contact Us", comingSoon: "Content for this page is coming soon.",
                     connect_title: "Connecting Breast Milk", rent_title: "Rent - Pass Items", handbook_title: "Parenting Handbook", feature_paragraph: "We provide a dedicated space for parents to connect, share, and support one another, making the journey of parenthood a little easier and a lot more connected.", more_button: "Learn More", forSale: "For Sale",
-                    addItemTitle: "Add New Item", itemName: "Name of the product", itemBrand: "Brand of the product", itemSize: "Size", itemCondition: "Condition", conditionNew: "New", conditionLikeNew: "Used - Like New", conditionGood: "Used - Good", conditionFair: "Used - Fair", priceOptions: "Price Options", forSaleOption: "For Sale", forRentOption: "For Rent", salePrice: "Sale Price ($)", rentPrice: "Rent Price ($ / day)", itemDescription: "Description", itemImage: "Image", imageUploadText: "Click to upload an image", postItemButton: "Post Item",
-                    aiGreeting: "Hello! I am măm's AI childcare consultant. Please tell me your question, and I'll ask for some details about your child to give the best advice.",
-                    aiAskAge: "To give the best advice, could you please tell me your child's age (e.g., '14 months', '3 years old')?",
-                    aiAskWeight: "Thank you. And what is your child's current weight (e.g., '10kg')?",
-                    aiAskHealth: "Got it. Lastly, could you briefly describe your child's general health (e.g., 'healthy', 'has a slight cough')?",
-                    aiReady: "Thank you for the information! Let me think about your question now...",
-                    aiInvalidAge: "I'm sorry, I didn't quite understand the age. Please provide it in a clear format like '6 months' or '2 years'.",
-                    aiInvalidWeight: "My apologies, I couldn't determine the weight. Please provide it in a clear format like '7kg' or '11.5 kg'.",
-                    aiDisclaimer: "Remember, I am an AI assistant. Always consult a pediatrician for serious health concerns."
+                    addItemTitle: "Add New Item", postItemButton: "Post Item",
                 },
                 vi: {
                     slogan: "Những mầm non đầu đời, đủ sữa - đủ đồ - đủ đầy yêu thương", start: "Bắt đầu", about: "Về chúng tôi", connect: "Kết nối sữa mẹ", rent: "Thuê - Pass đồ", handbook: "Cẩm nang nuôi dạy con", scan: "Tư vấn AI", login: "Đăng nhập", register: "Đăng ký", discovery: "khám phá", aboutText1: "Gần đây, nhiều phụ nữ sức khỏe kém dẫn đến không đủ sữa, chất lượng kém, thiếu sữa chất lượng cho con uống và vấn nạn sữa giả. Các bậc cha mẹ lần đầu nuôi con còn thiếu kiến thức, thiếu kinh nghiệm, điều kiện kinh tế hạn hẹp, con mau lớn nên thời gian sử dụng đồ đạc ngắn gây lãng phí. Những bà mẹ thừa sữa, những bậc cha mẹ điều kiện kinh tế khó khăn không đủ tiền mua đủ cho con.", scrollBanner: "măm đồng hành cùng bé và ba mẹ • ", aboutText2: "Thấu hiểu tâm lý đó, chúng tôi mong muốn tạo ra một trang web giúp các bậc cha mẹ giải quyết những vấn đề, kết nối họ với nhau, hướng dẫn họ đến con đường nuôi dạy con đúng đắn và nhẹ nhàng hơn.", contactUs: "Liên hệ", comingSoon: "Nội dung cho trang này sẽ sớm được cập nhật.",
                     connect_title: "Kết Nối Sữa Mẹ", rent_title: "Thuê - Pass Đồ", handbook_title: "Cẩm Nang Nuôi Dạy Con", feature_paragraph: "Chúng tôi cung cấp một không gian riêng để các bậc cha mẹ kết nối, chia sẻ và hỗ trợ lẫn nhau, giúp hành trình làm cha mẹ trở nên dễ dàng hơn và kết nối nhiều hơn.", more_button: "Tìm hiểu thêm", forSale: "Đăng bán",
-                    addItemTitle: "Thêm sản phẩm mới", itemName: "Tên sản phẩm", itemBrand: "Thương hiệu", itemSize: "Kích thước", itemCondition: "Tình trạng", conditionNew: "Mới", conditionLikeNew: "Đã dùng - Như mới", conditionGood: "Đã dùng - Tốt", conditionFair: "Đã dùng - Khá", priceOptions: "Tùy chọn giá", forSaleOption: "Để bán", forRentOption: "Cho thuê", salePrice: "Giá bán (VNĐ)", rentPrice: "Giá thuê (VNĐ / ngày)", itemDescription: "Mô tả", itemImage: "Hình ảnh", imageUploadText: "Nhấn để tải ảnh lên", postItemButton: "Đăng sản phẩm",
-                    aiGreeting: "Xin chào! Tôi là trợ lý AI tư vấn nuôi dạy con của măm. Bạn hãy cho tôi biết câu hỏi của bạn, tôi sẽ hỏi một vài thông tin về bé để đưa ra tư vấn tốt nhất nhé.",
-                    aiAskAge: "Để đưa ra lời khuyên tốt nhất, bạn vui lòng cho tôi biết tuổi của bé được không (ví dụ: '14 tháng', '3 tuổi')?",
-                    aiAskWeight: "Cảm ơn bạn. Bé nhà mình hiện nặng bao nhiêu kg ạ (ví dụ: '10kg')?",
-                    aiAskHealth: "Tôi hiểu rồi. Cuối cùng, bạn có thể mô tả sơ qua về tình hình sức khỏe chung của bé không (ví dụ: 'khỏe mạnh', 'đang ho nhẹ')?",
-                    aiReady: "Cảm ơn bạn đã cung cấp thông tin! Bây giờ hãy để tôi suy nghĩ về câu hỏi của bạn nhé...",
-                    aiInvalidAge: "Xin lỗi, tôi chưa hiểu rõ về tuổi của bé. Bạn vui lòng cung cấp dưới dạng như '6 tháng' hoặc '2 tuổi' nhé.",
-                    aiInvalidWeight: "Xin lỗi, tôi chưa xác định được cân nặng. Bạn vui lòng cung cấp dưới dạng như '7kg' hoặc '11.5 kg' nhé.",
-                    aiDisclaimer: "Lưu ý: Tôi là một trợ lý AI. Hãy luôn tham khảo ý kiến bác sĩ nhi khoa cho các vấn đề sức khỏe nghiêm trọng."
+                    addItemTitle: "Thêm sản phẩm mới", postItemButton: "Đăng sản phẩm",
                 }
             };
             let currentLang = 'vi';
@@ -604,8 +598,6 @@ const firebaseConfig = {
                 navLinks.forEach(link => link.classList.toggle('active', link.dataset.target === pageId));
                 window.scrollTo(0, 0);
                 setLanguage(currentLang);
-
-                // *** NEW: When we show page 5, we must load the products ***
                 if (pageId === 'page5') {
                     displayProducts();
                 }
@@ -614,8 +606,7 @@ const firebaseConfig = {
             document.getElementById('startButton').addEventListener('click', () => showPage('page2'));
             navLinks.forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); showPage(link.dataset.target, link.dataset.action); }));
 
-            // --- Your Carousel, Header Scroll, and Chat Widget logic ---
-            // This code can remain exactly as you had it.
+            // --- Carousel, Header Scroll, etc. logic ---
             const items = document.querySelectorAll('.carousel-item');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
@@ -628,31 +619,28 @@ const firebaseConfig = {
             const page2Observer = new MutationObserver((mutations) => { if(!mutations[0].target.classList.contains('hidden')){ currentIndex = 0; updateCarousel(); } });
             if(document.getElementById('page2')) page2Observer.observe(document.getElementById('page2'), { attributes: true, attributeFilter: ['class'] });
 
-            // ... Your other original UI logic (Header scroll, Chat widget) can go here ...
-
-            
             // --- 3. FIREBASE AUTHENTICATION LOGIC ---
             const loginForm = document.getElementById('login-form');
             const registerForm = document.getElementById('register-form');
             const showLoginBtn = document.getElementById('show-login-btn');
             const showRegisterBtn = document.getElementById('show-register-btn');
             const closeLoginPageBtn = document.getElementById('close-login-page-btn');
+            const loginContainer = document.getElementById('login-form-container');
+            const registerContainer = document.getElementById('register-form-container');
 
-            if(showLoginBtn) showLoginBtn.addEventListener('click', () => { loginForm.classList.remove('hidden'); registerForm.classList.add('hidden'); showLoginBtn.classList.add('active'); showRegisterBtn.classList.remove('active'); });
-            if(showRegisterBtn) showRegisterBtn.addEventListener('click', () => { loginForm.classList.add('hidden'); registerForm.classList.remove('hidden'); showLoginBtn.classList.remove('active'); showRegisterBtn.classList.add('active'); });
+            if(showLoginBtn) showLoginBtn.addEventListener('click', () => { loginContainer.classList.remove('hidden'); registerContainer.classList.add('hidden'); showLoginBtn.classList.add('active'); showRegisterBtn.classList.remove('active'); });
+            if(showRegisterBtn) showRegisterBtn.addEventListener('click', () => { loginContainer.classList.add('hidden'); registerContainer.classList.remove('hidden'); showLoginBtn.classList.remove('active'); showRegisterBtn.classList.add('active'); });
             if(closeLoginPageBtn) closeLoginPageBtn.addEventListener('click', (e) => { e.preventDefault(); showPage(lastPageId); });
 
-
-            // Handle User Registration
+            // Handle User Registration (Email)
             registerForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const email = registerForm.querySelector('input[name="email"]').value;
                 const password = registerForm.querySelector('input[name="password"]').value;
-
                 auth.createUserWithEmailAndPassword(email, password)
                     .then((userCredential) => {
                         alert('Đăng ký thành công! Bây giờ bạn có thể đăng nhập.');
-                        showLoginBtn.click(); // Switch to the login form
+                        showLoginBtn.click();
                     })
                     .catch((error) => {
                         console.error("Registration Error:", error);
@@ -660,16 +648,15 @@ const firebaseConfig = {
                     });
             });
 
-            // Handle User Login
+            // Handle User Login (Email)
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const email = loginForm.querySelector('input[name="email"]').value;
                 const password = loginForm.querySelector('input[name="password"]').value;
-
                 auth.signInWithEmailAndPassword(email, password)
                     .then((userCredential) => {
                         alert('Đăng nhập thành công!');
-                        showPage('page2'); // Navigate back to the main app
+                        showPage('page2');
                     })
                     .catch((error) => {
                         console.error("Login Error:", error);
@@ -677,7 +664,25 @@ const firebaseConfig = {
                     });
             });
 
-            // Listen for Authentication State Changes (the most important part!)
+            // NEW: Handle Social Login
+            const socialLogin = (provider) => {
+                auth.signInWithPopup(provider)
+                    .then((result) => {
+                        alert('Đăng nhập thành công với ' + result.user.displayName);
+                        showPage('page2');
+                    }).catch((error) => {
+                        console.error("Social Login Error:", error);
+                        alert('Đăng nhập thất bại: ' + error.message);
+                    });
+            };
+
+            document.getElementById('google-login-btn').addEventListener('click', () => socialLogin(googleProvider));
+            document.getElementById('facebook-login-btn').addEventListener('click', () => socialLogin(facebookProvider));
+            document.getElementById('google-register-btn').addEventListener('click', () => socialLogin(googleProvider));
+            document.getElementById('facebook-register-btn').addEventListener('click', () => socialLogin(facebookProvider));
+
+
+            // Listen for Authentication State Changes
             auth.onAuthStateChanged(user => {
                 const loginButton = document.querySelector('.nav-right a[data-action="show-login"]');
                 const registerButton = document.querySelector('.nav-right a[data-action="show-register"], .nav-right a[data-action="logout"]');
@@ -687,13 +692,13 @@ const firebaseConfig = {
                     // User is signed IN
                     loginButton.classList.add('hidden');
                     registerButton.textContent = 'Đăng xuất';
-                    registerButton.dataset.action = 'logout'; // Change its action to logout
+                    registerButton.dataset.action = 'logout';
                     postItemButton.classList.remove('hidden'); // Show the "Post Item" button
                 } else {
                     // User is signed OUT
                     loginButton.classList.remove('hidden');
                     registerButton.textContent = 'Đăng ký';
-                    registerButton.dataset.action = 'show-register'; // Change action back to register
+                    registerButton.dataset.action = 'show-register';
                     postItemButton.classList.add('hidden'); // Hide the "Post Item" button
                 }
             });
@@ -704,7 +709,7 @@ const firebaseConfig = {
                     e.preventDefault();
                     auth.signOut().then(() => {
                         alert('Bạn đã đăng xuất.');
-                        showPage('page1'); // Go back to the welcome page
+                        showPage('page1');
                     });
                 }
             });
@@ -712,8 +717,8 @@ const firebaseConfig = {
 
             // --- 4. FIREBASE PRODUCT DISPLAY LOGIC ---
             const productGrid = document.getElementById('product-grid');
-
             async function displayProducts() {
+                if (!productGrid) return;
                 productGrid.innerHTML = '<p>Đang tải sản phẩm...</p>';
                 try {
                     const productsRef = db.collection('products');
@@ -724,17 +729,12 @@ const firebaseConfig = {
                         return;
                     }
 
-                    productGrid.innerHTML = ''; // Clear the "loading" message
+                    productGrid.innerHTML = '';
                     snapshot.forEach(doc => {
                         const product = doc.data();
                         const productBox = document.createElement('div');
                         productBox.className = 'product-box';
-                        
-                        let priceHTML = '';
-                        if (product.salePrice) {
-                            priceHTML = `<div>Mua: ${Number(product.salePrice).toLocaleString('vi-VN')} VNĐ</div>`;
-                        }
-
+                        let priceHTML = product.salePrice ? `<div>Mua: ${Number(product.salePrice).toLocaleString('vi-VN')} VNĐ</div>` : '';
                         productBox.innerHTML = `
                             <div class="product-image" style="background-image: url('${product.imageUrl}');"></div>
                             <div class="product-info">
@@ -754,7 +754,7 @@ const firebaseConfig = {
 
             // --- 5. FIREBASE ADD NEW ITEM LOGIC ---
             const addItemModal = document.getElementById('add-item-modal');
-            const openModalBtn = document.getElementById('post-item-button');
+            const openModalBtn = document.getElementById('post-item-button'); // NEW: Connect to the floating button
             const closeModalBtn = document.getElementById('modal-close-btn');
             const addItemForm = document.getElementById('add-item-form');
             const itemImageInput = document.getElementById('item-image-input');
@@ -770,28 +770,19 @@ const firebaseConfig = {
                     alert('Bạn phải đăng nhập để đăng sản phẩm!');
                     return;
                 }
-
                 const file = itemImageInput.files[0];
                 if (!file) {
                     alert('Vui lòng chọn một hình ảnh cho sản phẩm.');
                     return;
                 }
-                
                 const submitButton = addItemForm.querySelector('button[type="submit"]');
                 submitButton.disabled = true;
                 submitButton.textContent = 'Đang xử lý...';
-
-                // 1. Create a unique path for the file in Firebase Storage
                 const filePath = `product-images/${user.uid}/${Date.now()}_${file.name}`;
                 const fileRef = storage.ref(filePath);
-
-                // 2. Upload the file
                 const uploadTask = fileRef.put(file);
-
                 uploadTask.on('state_changed', 
-                    (snapshot) => {
-                        // You can display upload progress here if you want
-                    }, 
+                    (snapshot) => {}, 
                     (error) => {
                         console.error('Upload failed:', error);
                         alert('Tải ảnh lên thất bại.');
@@ -799,16 +790,14 @@ const firebaseConfig = {
                         submitButton.textContent = 'Đăng sản phẩm';
                     }, 
                     () => {
-                        // 3. Upload completed successfully, now get the download URL
                         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                            // 4. Now save the product info (including the URL) to Firestore
                             db.collection('products').add({
                                 name: addItemForm.itemName.value,
                                 brand: addItemForm.itemBrand.value,
                                 condition: addItemForm.itemCondition.value,
                                 salePrice: addItemForm.salePrice.value,
                                 description: addItemForm.itemDescription.value,
-                                imageUrl: downloadURL, // The URL from Storage
+                                imageUrl: downloadURL,
                                 ownerId: user.uid,
                                 ownerEmail: user.email,
                                 created_at: firebase.firestore.FieldValue.serverTimestamp()
@@ -816,7 +805,7 @@ const firebaseConfig = {
                                 alert('Đăng sản phẩm thành công!');
                                 addItemForm.reset();
                                 addItemModal.classList.remove('visible');
-                                displayProducts(); // Refresh the product list on the page
+                                displayProducts();
                             }).catch((error) => {
                                 console.error("Error adding document: ", error);
                                 alert('Đã xảy ra lỗi khi lưu sản phẩm.');

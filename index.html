@@ -4,29 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>măm</title>
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- Google Fonts: Rowdies & Montserrat (from Code 1) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- GLOBAL STYLES & SETUP --- */
+        /* --- GLOBAL STYLES & SETUP (MERGED & ENHANCED) --- */
         :root {
             --primary-color: #e16232;
-            --bg-color: #FFFBEA;
+            --bg-color: #f8f1d5;
             --dark-text: #000000;
             --light-text: #f8f1d5;
             --green: #4f823d;
             --blue: #4a83b8;
             --yellow: #fae961;
+            --title-font: 'Rowdies', 'Helvetica Neue', sans-serif;
+            --body-font: 'Montserrat', 'Helvetica Neue', sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: var(--body-font);
             margin: 0;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+             font-family: var(--title-font);
+             color: var(--primary-color);
         }
 
         .hidden {
             display: none !important;
+        }
+
+        /* --- FADE-IN ANIMATION --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .logo-fade-in {
+            animation: fadeIn 2s ease-in-out;
         }
         
         /* --- LANGUAGE SELECTOR (SHARED) --- */
@@ -34,15 +58,16 @@
         .lang-btn { color: var(--dark-text); text-decoration: none; font-weight: bold; margin: 0 5px; cursor: pointer; transition: color 0.3s; }
         .lang-btn.active { color: var(--primary-color); }
 
-        /* --- PAGE 1: WELCOME --- */
+        /* --- PAGE 1: WELCOME (from Code 1) --- */
         #page1 { display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; position: relative; overflow: hidden; }
-        .welcome-container { animation: fadeIn 2s ease-in-out; z-index: 5; position: relative; }
+        .welcome-container { z-index: 5; position: relative; }
         #page1 .language-selector { position: absolute; top: -70px; right: 0; }
-        .logo-main { font-size: 15vw; color: var(--primary-color); font-weight: 900; }
-        .slogan { color: var(--dark-text); font-size: 1.5rem; margin-top: -20px; font-weight: bold; height: 2.5em; }
+        
+        .slogan { font-family: var(--body-font); color: var(--dark-text); font-size: 1.5rem; margin-top: 20px; font-weight: 700; height: 2.5em; }
+        
         .slogan .cursor { display: inline-block; background-color: var(--dark-text); margin-left: 0.1rem; width: 3px; animation: blink 1s infinite; }
         @keyframes blink { 50% { background-color: transparent; } }
-        .start-button { display: inline-block; margin-top: 40px; padding: 15px 45px; border: 3px solid var(--primary-color); border-radius: 50px; color: var(--primary-color); text-decoration: none; font-weight: bold; font-size: 1.2rem; transition: background-color 0.3s, color 0.3s; }
+        .start-button { font-family: var(--title-font); display: inline-block; margin-top: 40px; padding: 15px 45px; border: 3px solid var(--primary-color); border-radius: 50px; color: var(--primary-color); text-decoration: none; font-weight: normal; font-size: 1.5rem; transition: background-color 0.3s, color 0.3s; }
         .start-button:hover { background-color: var(--primary-color); color: var(--light-text); cursor: pointer; }
         .decorations { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .decorations .shape { position: absolute; animation: float 25s infinite linear; list-style: none; }
@@ -55,77 +80,104 @@
         .decorations .triangle { width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-bottom: 30px solid var(--yellow); top: 20%; left: 85%; animation-delay: -15s; animation-duration: 30s; }
         .decorations .circle.c2 { top: 75%; left: 80%; background-color: var(--yellow); animation-delay: -3s; animation-duration: 24s; }
         .decorations .triangle.t2 { top: 40%; left: 5%; border-bottom-color: var(--green); animation-delay: -8s; animation-duration: 20s; }
-        @keyframes float { 0% { transform: translateY(0px) rotate(0deg); opacity: 0.7; } 50% { transform: translateY(-30px) rotate(180deg); opacity: 1; } 100% { transform: translateY(0px) rotate(360deg); opacity: 0.7; } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* --- PAGE 2: HOME CAROUSEL --- */
+        @keyframes float { 0% { transform: translateY(0px) rotate(0deg); opacity: 0.7; } 50% { transform: translateY(-30px) rotate(180deg); opacity: 1; } 100% { translateY(0px) rotate(360deg); opacity: 0.7; } }
+        
+        /* --- PAGE 2: HOME CAROUSEL (from Code 1) --- */
         #page2 { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
-        .carousel-container { display: flex; align-items: center; justify-content: center; width: 100%; height: 300px; }
+        .carousel-container { display: flex; align-items: center; justify-content: center; width: 100%; height: 350px; }
         .carousel { position: relative; width: 100%; height: 100%; }
-        .carousel-item { position: absolute; width: 200px; height: 200px; border-radius: 50%; background-color: var(--primary-color); display: flex; justify-content: center; align-items: center; text-align: center; color: white; font-size: 1.2rem; font-weight: bold; padding: 10px; cursor: pointer; transition: transform 0.5s ease-out, opacity 0.5s ease-out; left: 50%; top: 50%; margin-left: -100px; margin-top: -100px; transform: scale(0); opacity: 0; }
-        .carousel-item.active { transform: translateX(0) scale(1.5); opacity: 1; z-index: 10; overflow: hidden; }
+        .carousel-item { position: absolute; width: 220px; height: auto; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; cursor: pointer; transition: transform 0.5s ease-out, opacity 0.5s ease-out; left: 50%; top: 50%; margin-left: -110px; margin-top: -150px; transform: scale(0); opacity: 0; background: none; }
+        .image-wrapper { position: relative; width: 200px; height: 200px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; transition: transform 0.3s; }
+        .carousel-item:hover .image-wrapper { transform: translateY(-5px); }
+        .carousel-item .carousel-image { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+        
+        .carousel-item .circle-content { font-family: var(--title-font); font-size: 1.7rem; color: var(--dark-text); font-weight: bold; }
+        
+        .carousel-item.active { transform: translateX(0) scale(1.5); opacity: 1; z-index: 10; }
         .carousel-item.prev { transform: translateX(-280px) scale(0.8); opacity: 0.5; z-index: 5; }
         .carousel-item.next { transform: translateX(280px) scale(0.8); opacity: 0.5; z-index: 5; }
-        .discovery-follower { position: absolute; width: 100px; height: 100px; background-color: rgba(248, 241, 213, 0.8); border-radius: 50%; color: var(--primary-color); display: flex; justify-content: center; align-items: center; font-size: 1.1rem; font-weight: bold; opacity: 0; transform: translate(-50%, -50%) scale(0); transition: opacity 0.3s, transform 0.3s; pointer-events: none; z-index: 11; }
-        .carousel-item.active:hover .discovery-follower { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        
+        .discovery-follower { font-family: var(--title-font); position: absolute; width: 50px; height: 50px; background-color: var(--dark-text); border-radius: 50%; color: var(--light-text); display: flex; justify-content: center; align-items: center; font-size: 0.6rem; font-weight: normal; opacity: 0; transform: translate(-50%, -50%) scale(0); transition: opacity 0.3s, transform 0.3s; pointer-events: none; z-index: 11; line-height: 1; }
+        .carousel-item.active .image-wrapper:hover .discovery-follower { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         .carousel-nav { margin-top: 50px; }
-        .carousel-nav button { background-color: var(--primary-color); border: none; color: white; padding: 10px 20px; font-size: 24px; cursor: pointer; margin: 0 25px; border-radius: 50%; width: 50px; height: 50px; transition: transform 0.2s; }
+        
+        .carousel-nav button { background-color: var(--primary-color); border: none; color: white; padding: 0; line-height: 50px; text-align: center; font-size: 24px; cursor: pointer; margin: 0 25px; border-radius: 50%; width: 50px; height: 50px; transition: transform 0.2s; }
         .carousel-nav button:hover { transform: scale(1.1); }
 
-        /* --- SHARED HEADER & FOOTER --- */
+        /* --- SHARED HEADER & FOOTER (MERGED) --- */
         .main-header { position: fixed; top: 0; width: 100%; background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(5px); z-index: 1000; transition: top 0.4s ease-in-out; }
         .main-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 30px; }
         .nav-left, .nav-right { display: flex; align-items: center; gap: 15px; }
-        .nav-item { color: #333; text-decoration: none; padding: 10px 15px; margin: 0; border-radius: 8px; font-weight: bold; transition: background-color 0.3s, color 0.3s; }
+        
+        .nav-item { font-family: var(--title-font); font-size: 1.2rem; color: #333; text-decoration: none; padding: 8px 15px; margin: 0; border-radius: 8px; font-weight: bold; transition: background-color 0.3s, color 0.3s; }
+        
         .nav-item:hover { background-color: rgba(225, 98, 50, 0.2); }
         .nav-item.active { background-color: var(--primary-color); color: var(--light-text); }
-        .nav-logo { color: var(--primary-color); font-weight: 900; font-size: 28px; text-decoration: none; margin-right: 15px; }
         
-        /* NEW: User Profile Styles */
+        .nav-logo img { height: 30px; width: auto; }
+        
+        .contact-footer h3 { font-size: 2rem; font-weight: normal; }
+
+        /* NEW: User Profile Styles (from Code 2) */
         .user-profile { display: flex; align-items: center; gap: 12px; }
         .user-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-color); }
-        .user-name { font-weight: bold; color: #333; }
-        #logout-btn { color: #333; font-weight: bold; cursor: pointer; padding: 10px 15px; border-radius: 8px; transition: background-color 0.3s; }
-        #logout-btn:hover { background-color: rgba(0,0,0,0.1); }
+        .user-name { font-weight: bold; color: #333; font-family: var(--body-font); font-size: 1rem; }
+        #logout-btn { color: #333; cursor: pointer; font-family: var(--title-font); font-size: 1.2rem; text-decoration: none; padding: 8px 15px; border-radius: 8px; transition: background-color 0.3s, color 0.3s; }
+        #logout-btn:hover { background-color: rgba(225, 98, 50, 0.2); }
 
-        .contact-footer { background-color: var(--dark-text); color: var(--light-text); padding: 40px 10%; text-align: center; }
-        .contact-footer h3 { font-size: 1.5rem; color: var(--primary-color); margin-bottom: 20px; }
-        .contact-info { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; }
-        .contact-info a, .contact-info span { color: var(--light-text); text-decoration: none; font-size: 1.1rem; }
-        .contact-info svg { width: 30px; height: 30px; fill: var(--light-text); transition: fill 0.3s; }
-        .contact-info a:hover svg { fill: var(--primary-color); }
+        /* --- CONTENT PAGES & ABOUT PAGE (from Code 1) --- */
+        .page-content { padding-top: 100px; padding-bottom: 100px; }
+        .page-content p { font-family: var(--body-font); }
+        
+        .about-section .slogan-sub { font-family: var(--body-font); font-size: 1.3rem; color: #333; font-weight: 700; }
+        
+        .photo-frame-section { position: relative; width: 100%; margin: 8rem 0; display: flex; justify-content: center; align-items: center; }
+        .about-video { max-width: 100%; height: auto; display: block; border-radius: 15px; }
+        .text-overlay { position: absolute; z-index: 2; background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(5px); padding: 30px; width: 80%; max-width: 800px; border-radius: 15px; font-size: 1.1rem; color: #000; line-height: 1.6; text-align: center; }
+        
+        .decorative-line-section { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); padding: 80px 0 40px 0; }
+        .decorative-line-section img { width: 100%; height: auto; display: block; }
+        
+        .about-section.final-text { padding-top: 0; padding-bottom: 80px; }
+        
+        .final-text p { font-size: 1.1rem; line-height: 1.7; font-weight: 600; }
+        
+        .feature-section h2 { font-size: 2.8rem; font-weight: bold; }
+        
+        .feature-section p { line-height: 1.6; margin-bottom: 30px; }
+        .more-button { font-family: var(--title-font); font-size: 1.2rem; display: inline-block; padding: 10px 30px; border: 2px solid var(--primary-color); border-radius: 30px; color: var(--primary-color); text-decoration: none; font-weight: normal; transition: background-color 0.3s, color 0.3s; }
+        .more-button:hover { background-color: var(--primary-color); color: var(--light-text); }
+        
+        .feature-section { display: flex; gap: 40px; align-items: center; padding: 50px 10%; }
 
-        /* --- CONTENT PAGES --- */
-        .page-content { padding-top: 100px; padding-bottom: 100px; min-height: 70vh; }
+        /* --- DYNAMIC CONTENT STYLES (from Code 2, adapted) --- */
         .content-container { padding: 20px 5%; }
         .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .page-header h1 { color: var(--primary-color); }
+        .page-header h1 { font-family: var(--title-font); font-size: 3.5rem; font-weight: normal; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
         .item-box { background-color: white; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
         .item-box:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
         .item-image { width: 100%; height: 250px; background-size: cover; background-position: center; }
         .item-info { padding: 15px; text-align: left; flex-grow: 1; display: flex; flex-direction: column; }
-        .item-name { font-size: 1.2rem; margin: 0 0 10px 0; color: #333; }
+        .item-name { font-size: 1.2rem; margin: 0 0 10px 0; color: #333; font-family: var(--title-font); }
         .item-price { font-size: 1.1rem; color: var(--primary-color); font-weight: bold; margin-bottom: 15px; }
         .item-details { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
-        .item-details span { display: block; margin-bottom: 5px; }
-        .contact-owner-btn { width: 100%; padding: 12px; border: none; background-color: var(--primary-color); color: var(--light-text); border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: auto; transition: background-color 0.3s; }
+        .item-details span { display: block; margin-bottom: 5px; font-family: var(--body-font); }
+        .contact-owner-btn { width: 100%; padding: 12px; border: none; background-color: var(--primary-color); color: var(--light-text); border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: auto; transition: background-color 0.3s; font-family: var(--body-font);}
         .contact-owner-btn:hover { opacity: 0.9; }
+        .placeholder-page { display: flex; justify-content: center; align-items: center; flex-direction: column; min-height: 60vh; padding: 20px; }
+        .placeholder-page p { color: #333; font-size: 1.2rem;}
 
-        /* --- Floating Action Button --- */
-        .post-item-btn { position: fixed; bottom: 40px; right: 40px; width: 70px; height: 70px; background-color: var(--primary-color); color: var(--light-text); border: none; border-radius: 35px; font-size: 28px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1001; transition: transform 0.2s; }
-        .post-item-btn:hover { transform: scale(1.1); }
-
-        /* --- LOGIN & REGISTER PAGE STYLES --- */
+        /* --- LOGIN & REGISTER FORM STYLES (from Code 1, adapted for Code 2 structure) --- */
         #page8 { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 40px 20px; }
         .form-wrapper { background-color: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; position: relative; }
+        .form-wrapper h2 { font-family: var(--title-font); font-size: 2.2rem; font-weight: normal; margin-bottom: 20px;}
         .close-form-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #aaa; cursor: pointer; transition: color 0.3s; text-decoration: none; }
         .close-form-btn:hover { color: var(--dark-text); }
         .form-toggle { display: flex; justify-content: center; margin-bottom: 30px; border: 1px solid #ddd; border-radius: 30px; overflow: hidden; }
-        .form-toggle button { flex: 1; padding: 15px; border: none; background-color: transparent; font-weight: bold; font-size: 1rem; cursor: pointer; transition: all 0.3s; color: #333; }
-        .form-toggle button.active { background-color: var(--primary-color); color: var(--light-text); }
-        .form-wrapper h2 { color: var(--primary-color); margin-bottom: 20px; }
-        .social-login .social-btn { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border:none; text-decoration: none; font-weight: bold; color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; transition: opacity 0.3s; cursor: pointer; font-size: 1rem; }
+        .form-toggle button { flex: 1; padding: 15px; border: none; background-color: transparent; cursor: pointer; transition: all 0.3s; color: #333; font-family: var(--body-font); font-weight: bold; font-size: 1rem; }
+        .form-toggle button.active { background-color: var(--primary-color); color: white; }
+        .social-login .social-btn { padding: 12px; margin-bottom: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; transition: opacity 0.3s; border: none; cursor: pointer; width: 100%; font-family: var(--body-font); }
         .social-login .social-btn:hover { opacity: 0.9; }
         .social-btn i { font-size: 1.2rem; }
         .social-btn.facebook { background-color: #3b5998; }
@@ -134,15 +186,64 @@
         .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #ddd; }
         .divider p { margin: 0 15px; font-weight: bold; }
         .form-wrapper form input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .submit-btn { width: 100%; padding: 15px; border: none; background-color: var(--primary-color); color: var(--light-text); border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: opacity 0.3s; }
+        .submit-btn { font-family: var(--body-font); font-weight: bold; font-size: 1.1rem; width: 100%; padding: 15px; border: none; background-color: var(--primary-color); color: white; border-radius: 8px; cursor: pointer; transition: opacity 0.3s;}
         .submit-btn:hover { opacity: 0.9; }
+
+        .contact-footer { background-color: var(--dark-text); color: var(--light-text); padding: 40px 10%; text-align: center; }
+        .contact-info { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; }
+        .contact-info a, .contact-info span { color: var(--light-text); text-decoration: none; font-size: 1.1rem; }
+        .contact-info svg { width: 30px; height: 30px; fill: var(--light-text); transition: fill 0.3s; }
+        .contact-info a:hover svg { fill: var(--primary-color); }
+        .about-section { padding: 50px 10%; text-align: center; margin-bottom: 0; }
+        .about-section .logo-main img { height: 8rem; width: auto; }
+        .about-decorations { position: relative; height: 100px; margin-bottom: 3rem; }
+        .scroll-banner { background-color: var(--primary-color); color: var(--light-text); overflow: hidden; white-space: nowrap; padding: 20px 0; border-top: 3px solid black; border-bottom: 3px solid black; display: flex; }
+        .scroll-text { display: flex; animation: scroll-left 40s linear infinite; }
+        .scroll-text span { white-space: nowrap; padding-right: 2em; font-size: 1.2rem; }
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .final-text p { max-width: 800px; margin: 0 auto; }
+        .feature-section:nth-child(even) { flex-direction: row-reverse; }
+        .feature-text { flex: 1; text-align: left; }
+
+        .feature-image { flex: 1; height: 300px; display: flex; align-items: center; justify-content: center; background-size: contain; background-position: center; background-repeat: no-repeat; animation: float-vertical 3s ease-in-out infinite alternate; }
+        @keyframes float-vertical { from { transform: translateY(-20px); } to { transform: translateY(20px); } }
+
+        #feature-sections-container { margin-bottom: 80px; }
+        #feature-sections-container .feature-section:nth-child(1) .feature-image { background-image: url('knsm.png'); }
+        #feature-sections-container .feature-section:nth-child(2) .feature-image { background-image: url('t&p.png'); }
+        #feature-sections-container .feature-section:nth-child(3) .feature-image { background-image: url('cnlcm.png'); }
         
-        /* --- MODAL STYLES --- */
+        @media (max-width: 768px) { .feature-section, .feature-section:nth-child(even) { flex-direction: column; } }
+
+        .post-item-btn { position: fixed; bottom: 110px; right: 40px; width: 70px; height: 70px; background-color: var(--primary-color); color: var(--light-text); border: none; border-radius: 35px; font-size: 28px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1001; transition: transform 0.2s; }
+        .post-item-btn:hover { transform: scale(1.1); }
+        
+        /* CHAT WIDGET STYLES (from Code 1) */
+        #floating-chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 2000; }
+        #chat-toggle-btn { background-color: var(--primary-color); color: var(--light-text); width: 60px; height: 60px; border-radius: 50%; border: none; font-size: 28px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.25); cursor: pointer; transition: transform 0.2s ease-out; }
+        #chat-toggle-btn:hover { transform: scale(1.1); }
+        #chat-window { position: absolute; bottom: 80px; right: 0; width: 370px; height: 500px; background: white; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.2); display: flex; flex-direction: column; overflow: hidden; transform-origin: bottom right; transform: scale(0); opacity: 0; transition: transform 0.3s ease-out, opacity 0.3s ease-out; }
+        #chat-window.visible { transform: scale(1); opacity: 1; }
+        .chat-header { position: relative; padding: 15px; background-color: var(--primary-color); color: var(--light-text); font-weight: bold; font-size: 1.1rem; text-align: center; font-family: var(--title-font); }
+        .chat-close-btn { position: absolute; top: 50%; right: 15px; transform: translateY(-50%); background: none; border: none; color: var(--light-text); font-size: 2rem; line-height: 1; cursor: pointer; opacity: 0.8; }
+        .chat-close-btn:hover { opacity: 1; }
+        .chat-messages { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .message { padding: 10px 15px; border-radius: 18px; max-width: 85%; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
+        .user-message { background-color: #e0e0e0; color: black; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .ai-message { background-color: var(--blue); color: white; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #ddd; background: #f9f9f9; }
+        .chat-input-area #chat-text-input { flex-grow: 1; border: 1px solid #ccc; border-radius: 20px; padding: 10px 15px; resize: none; margin: 0 10px; font-family: var(--body-font); }
+        .chat-input-area button { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #555; transition: color 0.3s; padding: 5px; }
+        .chat-input-area button:hover { color: var(--primary-color); }
+        .image-upload-label { display: flex; align-items: center; justify-content: center; }
+        @media (max-width: 480px) { #chat-window { width: calc(100vw - 40px); height: 70vh; right: -10px; bottom: 80px; } }
+        
+        /* MODAL STYLES (MERGED) */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 3000; display: flex; justify-content: center; align-items: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .modal-overlay.visible { opacity: 1; pointer-events: auto; }
         .modal-content { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); width: 100%; max-width: 600px; position: relative; max-height: 90vh; overflow-y: auto; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
-        .modal-header h2 { margin: 0; color: var(--primary-color); }
+        .modal-header h2 { font-family: var(--title-font); font-size: 2.2rem; font-weight: normal; margin: 0; }
         .modal-close-btn { font-size: 2.5rem; line-height: 1; color: #aaa; cursor: pointer; background: none; border: none; }
         .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
@@ -151,125 +252,175 @@
 </head>
 <body>
 
-    <!-- ======== Pages: Welcome, Carousel, About, etc. (Mostly unchanged) ======== -->
+    <!-- ======== Page 1: Welcome (from Code 1) ======== -->
     <div id="page1">
-        <!-- Welcome Content -->
         <div class="welcome-container">
-            <div class="logo-main">măm</div>
-            <p class="slogan"></p>
-            <a id="startButton" class="start-button">Bắt đầu</a>
+            <div class="language-selector"><a class="lang-btn" data-lang="en">EN</a> | <a class="lang-btn active" data-lang="vi">VI</a></div>
+            <div class="logo-main">
+                <img src="logo.png" alt="măm logo" class="logo-fade-in" style="width: 50vw; max-width: 450px; height: auto;">
+            </div>
+            <p class="slogan" data-lang-key="slogan"></p>
+            <a id="startButton" class="start-button" data-lang-key="start"></a>
         </div>
         <div class="decorations"> <div class="shape circle"></div><div class="shape star"></div><div class="shape heart"></div><div class="shape triangle"></div><div class="shape circle c2"></div><div class="shape triangle t2"></div> </div>
     </div>
+
+    <!-- ======== Page 2: Carousel (from Code 1) ======== -->
     <div id="page2" class="hidden">
-        <!-- Carousel Content -->
         <div class="carousel-container">
             <div class="carousel">
-                <div class="carousel-item" data-target="page3"><div class="circle-content">Về chúng tôi</div><div class="discovery-follower">khám phá</div></div>
-                <div class="carousel-item" data-target="page4"><div class="circle-content">Kết nối sữa mẹ</div><div class="discovery-follower">khám phá</div></div>
-                <div class="carousel-item" data-target="page5"><div class="circle-content">Thuê - Pass đồ</div><div class="discovery-follower">khám phá</div></div>
-                <div class="carousel-item" data-target="page6"><div class="circle-content">Cẩm nang</div><div class="discovery-follower">khám phá</div></div>
+                <div class="carousel-item" data-target="page3">
+                    <div class="image-wrapper"><img src="vct.png" alt="Về chúng tôi" class="carousel-image"><div class="discovery-follower" data-lang-key="explore"></div></div>
+                    <div class="circle-content" data-lang-key="about"></div>
+                </div>
+                <div class="carousel-item" data-target="page4">
+                    <div class="image-wrapper"><img src="knsm.png" alt="Kết nối sữa mẹ" class="carousel-image"><div class="discovery-follower" data-lang-key="explore"></div></div>
+                    <div class="circle-content" data-lang-key="connect"></div>
+                </div>
+                <div class="carousel-item" data-target="page5">
+                    <div class="image-wrapper"><img src="t&p.png" alt="Thuê - Pass đồ" class="carousel-image"><div class="discovery-follower" data-lang-key="explore"></div></div>
+                    <div class="circle-content" data-lang-key="rent"></div>
+                </div>
+                <div class="carousel-item" data-target="page6">
+                    <div class="image-wrapper"><img src="cnlcm.png" alt="Cẩm nang làm cha mẹ" class="carousel-image"><div class="discovery-follower" data-lang-key="explore"></div></div>
+                    <div class="circle-content" data-lang-key="handbook"></div>
+                </div>
             </div>
         </div>
         <div class="carousel-nav"><button id="prevBtn"><</button><button id="nextBtn">></button></div>
     </div>
-    <div id="page3" class="page-content hidden"> <!-- About Us page --> </div>
-    
-    <!-- ======== Header (MODIFIED) ======== -->
+
+    <!-- ======== Header (MERGED) ======== -->
     <header id="mainHeader" class="main-header hidden">
         <nav class="main-nav">
             <div class="nav-left">
-                <a href="#" class="nav-logo" data-target="page1">măm</a>
-                <a href="#" class="nav-item" data-target="page3">Về chúng tôi</a>
-                <a href="#" class="nav-item" data-target="page4">Kết nối sữa mẹ</a>
-                <a href="#" class="nav-item" data-target="page5">Thuê - Pass đồ</a>
-                <a href="#" class="nav-item" data-target="page6">Cẩm nang</a>
+                <a href="#" class="nav-logo" data-target="page1"><img src="logo.png" alt="măm logo"></a>
+                <a href="#" class="nav-item" data-target="page3" data-lang-key="about"></a>
+                <a href="#" class="nav-item" data-target="page4" data-lang-key="connect"></a>
+                <a href="#" class="nav-item" data-target="page5" data-lang-key="rent"></a>
+                <a href="#" class="nav-item" data-target="page6" data-lang-key="handbook"></a>
             </div>
             <div class="nav-right">
-                <!-- This container holds Login/Register buttons -->
+                <!-- Auth links from Code 2, styled by Code 1 -->
                 <div id="auth-links">
-                    <a href="#" class="nav-item" data-target="page8" data-action="show-login">Đăng nhập</a>
-                    <a href="#" class="nav-item" data-target="page8" data-action="show-register">Đăng ký</a>
+                    <a href="#" class="nav-item" data-target="page8" data-action="show-login" data-lang-key="login"></a>
+                    <a href="#" class="nav-item" data-target="page8" data-action="show-register" data-lang-key="register"></a>
                 </div>
-                <!-- NEW: This container holds the user profile when logged in -->
+                <!-- User profile from Code 2, styled by merged CSS -->
                 <div id="user-profile" class="user-profile hidden">
                     <img id="user-avatar" src="" alt="Avatar" class="user-avatar">
                     <span id="user-name" class="user-name"></span>
-                    <a id="logout-btn">Đăng xuất</a>
+                    <a href="#" id="logout-btn" data-lang-key="logout"></a>
                 </div>
+                 <div class="language-selector"><a class="lang-btn" data-lang="en">EN</a> | <a class="lang-btn active" data-lang="vi">VI</a></div>
             </div>
         </nav>
     </header>
 
-    <!-- ======== PAGE 4: Breast Milk Connection (NEW & DYNAMIC) ======== -->
+    <!-- ======== Footer Template (from Code 1) ======== -->
+    <template id="contact-footer-template">
+        <footer class="contact-footer">
+            <h3 data-lang-key="contactUs"></h3>
+            <div class="contact-info">
+                <a href="https://www.facebook.com/profile.php?id=61578581430202" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06c0 5.06 3.67 9.25 8.44 10v-7.03h-2.5v-2.92h2.5v-2.17c0-2.47 1.46-3.85 3.75-3.85 1.08 0 2 .08 2.27.11v2.6h-1.5c-1.2 0-1.43.57-1.43 1.4v1.86h2.9l-.38 2.92h-2.52V22.06C18.33 21.31 22 17.12 22 12.06c0-5.53-4.5-10.02-10-10.02z"/></svg></a>
+                <a href="https://www.instagram.com/_mam.2025_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c-2.72 0-3.05.01-4.12.06-1.06.05-1.79.23-2.42.47-.65.25-1.23.59-1.79 1.15-.56.56-.9 1.14-1.15 1.79-.24.63-.42 1.36-.47 2.42C2.01 8.95 2 9.28 2 12s.01 3.05.06 4.12c.05 1.06.23 1.79.47 2.42.25.65.59 1.23 1.15 1.79.56.56 1.14.9 1.79 1.15.63.24 1.36.42 2.42.47 1.07.05 1.4.06 4.12.06s3.05-.01 4.12-.06c1.06-.05 1.79-.23 2.42-.47.65-.25 1.23-.59 1.79-1.15.56.56.9-1.14 1.15-1.79.24-.63-.42-1.36-.47-2.42.05-1.07.06-1.4.06-4.12s-.01-3.05-.06-4.12c-.05-1.06-.23-1.79-.47-2.42-.25-.65-.59-1.23-1.15-1.79-.56-.56-1.14-.9-1.79-1.15-.63-.24-1.36-.42-2.42-.47C15.05 2.01 14.72 2 12 2zm0 1.62c2.67 0 2.99.01 4.05.06 1-.05 1.5.11 1.8.22.38.13.62.3.8.5.17.18.34.42.48.8.11.3.27.8.22 1.8.05 1.06.06 1.38.06 4.05s-.01 2.99-.06 4.05c-.05 1-.11 1.5-.22 1.8-.13.38-.3.62-.5.8-.18.17-.42.34-.8.48-.3.11-.8.27-1.8.22-1.06.05-1.38.06-4.05.06s-2.99-.01-4.05-.06c-1-.05-1.5-.11-1.8-.22-.38-.13-.62-.3-.8-.5-.17-.18-.34-.42-.48-.8-.11-.3-.27-.8-.22-1.8C3.63 15 3.62 14.67 3.62 12s.01-2.99.06-4.05c.05-1 .11-1.5.22-1.8.13-.38.3-.62.5-.8.18-.17-.42.34.8-.48.3-.11.8-.27 1.8-.22C9.01 3.63 9.33 3.62 12 3.62zM12 7.25c-2.62 0-4.75 2.13-4.75 4.75S9.38 16.75 12 16.75s4.75-2.13 4.75-4.75S14.62 7.25 12 7.25zm0 7.88c-1.73 0-3.12-1.4-3.12-3.12s1.4-3.12 3.12-3.12 3.12 1.4 3.12 3.12-1.4 3.12-3.12 3.12zm6.22-8.3c-.6 0-1.08.48-1.08 1.08s.48 1.08 1.08 1.08 1.08-.48 1.08-1.08-.48-1.08-1.08-1.08z"/></svg></a>
+                <span>Hotline: 0903252618</span>
+                <span>Email: mam.dms42025@gmail.com</span>
+            </div>
+        </footer>
+    </template>
+
+    <!-- ======== Page 3: About Us (from Code 1) ======== -->
+    <div id="page3" class="page-content hidden">
+        <section class="about-section about-decorations">
+            <div class="logo-main"><img src="logo.png" alt="măm logo"></div>
+            <p class="slogan-sub" data-lang-key="slogan"></p>
+            <div class="decorations"><div class="shape circle"></div><div class="shape star"></div><div class="shape heart"></div><div class="shape triangle"></div><div class="shape circle c2"></div><div class="shape triangle t2"></div></div>
+        </section>
+        <section class="photo-frame-section">
+            <video src="video_homepage_1.mp4" autoplay muted loop playsinline class="about-video"></video>
+            <div class="text-overlay"><p data-lang-key="aboutText1"></p></div>
+        </section>
+        <section class="about-section scroll-banner">
+            <div class="scroll-text">
+                <span data-lang-key="scrollBanner"></span><span data-lang-key="scrollBanner"></span><span data-lang-key="scrollBanner"></span><span data-lang-key="scrollBanner"></span>
+            </div>
+        </section>
+        <section class="decorative-line-section"><img src="decor_line.png" alt="Decorative line element"></section>
+        <section class="about-section final-text"><p data-lang-key="aboutText2"></p></section>
+        <div id="feature-sections-container">
+            <section class="feature-section"> <div class="feature-text"> <h2 data-lang-key="connect_title"></h2> <p data-lang-key="feature_paragraph_connect"></p> <a href="#" class="more-button" data-target="page4" data-lang-key="more_button"></a> </div> <div class="feature-image"></div> </section>
+            <section class="feature-section"> <div class="feature-text"> <h2 data-lang-key="rent_title"></h2> <p data-lang-key="feature_paragraph_rent"></p> <a href="#" class="more-button" data-target="page5" data-lang-key="more_button"></a> </div> <div class="feature-image"></div> </section>
+            <section class="feature-section"> <div class="feature-text"> <h2 data-lang-key="handbook_title"></h2> <p data-lang-key="feature_paragraph_handbook"></p> <a href="#" class="more-button" data-target="page6" data-lang-key="more_button"></a> </div> <div class="feature-image"></div> </section>
+        </div>
+    </div>
+
+    <!-- ======== Page 4: Breast Milk Connection (Structure from Code 2) ======== -->
     <div id="page4" class="page-content hidden">
         <div class="content-container">
-            <div class="page-header">
-                <h1>Kết nối sữa mẹ</h1>
-            </div>
+            <div class="page-header"><h1 data-lang-key="connect_title_main"></h1></div>
             <div id="milk-post-grid" class="grid-container">
                 <!-- Milk posts will be dynamically inserted here by JavaScript -->
             </div>
         </div>
     </div>
-
-    <!-- ======== PAGE 5: Rent/Pass Items (MODIFIED) ======== -->
+    
+    <!-- ======== Page 5: Rent/Pass Items (Structure from Code 2) ======== -->
     <div id="page5" class="page-content hidden">
         <div class="content-container">
-            <div class="page-header">
-                <h1>Thuê - Pass đồ</h1>
-            </div>
+            <div class="page-header"><h1 data-lang-key="rent_title_main"></h1></div>
             <div id="product-grid" class="grid-container">
                 <!-- Products will be dynamically inserted here by JavaScript -->
             </div>
         </div>
     </div>
 
-    <div id="page6" class="page-content hidden"> <!-- Handbook page --> </div>
-
-    <!-- ======== PAGE 8: Login/Register Forms ======== -->
+    <!-- ======== Page 6: Handbook (Placeholder) ======== -->
+    <div id="page6" class="page-content hidden">
+        <div class="placeholder-page"><h1 data-lang-key="handbook"></h1><p data-lang-key="comingSoon"></p></div>
+    </div>
+    
+    <!-- ======== Page 8: Login/Register (Structure from Code 2, styled by Code 1) ======== -->
     <div id="page8" class="page-content hidden">
         <div class="form-wrapper">
             <a href="#" id="close-login-page-btn" class="close-form-btn" title="Go Back">×</a>
             <div class="form-toggle">
-                <button id="show-login-btn" class="active">Đăng nhập</button>
-                <button id="show-register-btn">Đăng ký</button>
+                <button id="show-login-btn" class="active" data-lang-key="login"></button>
+                <button id="show-register-btn" data-lang-key="register"></button>
             </div>
             <!-- Login Form -->
             <div id="login-form-container">
-                <h2>Đăng nhập vào tài khoản</h2>
+                <h2 data-lang-key="login_account"></h2>
                 <div class="social-login">
-                    <button id="google-login-btn" class="social-btn google"><i class="fab fa-google"></i> Đăng nhập với Google</button>
-                    <button id="facebook-login-btn" class="social-btn facebook"><i class="fab fa-facebook-f"></i> Đăng nhập với Facebook</button>
+                    <button id="google-login-btn" class="social-btn google"><i class="fab fa-google"></i> <span data-lang-key="login_google"></span></button>
+                    <button id="facebook-login-btn" class="social-btn facebook"><i class="fab fa-facebook-f"></i> <span data-lang-key="login_facebook"></span></button>
                 </div>
                 <div class="divider"><p>HOẶC</p></div>
                 <form id="login-form">
                     <input type="email" name="email" placeholder="Email" required>
-                    <input type="password" name="password" placeholder="Mật khẩu" required>
-                    <button type="submit" class="submit-btn">Đăng nhập</button>
+                    <input type="password" name="password" data-placeholder-key="password" required>
+                    <button type="submit" class="submit-btn" data-lang-key="login"></button>
                 </form>
             </div>
             <!-- Register Form -->
             <div id="register-form-container" class="hidden">
-                 <h2>Tạo tài khoản mới</h2>
+                 <h2 data-lang-key="register_account"></h2>
                 <div class="social-login">
-                    <button id="google-register-btn" class="social-btn google"><i class="fab fa-google"></i> Đăng ký với Google</button>
-                    <button id="facebook-register-btn" class="social-btn facebook"><i class="fab fa-facebook-f"></i> Đăng ký với Facebook</button>
+                    <button id="google-register-btn" class="social-btn google"><i class="fab fa-google"></i> <span data-lang-key="register_google"></span></button>
+                    <button id="facebook-register-btn" class="social-btn facebook"><i class="fab fa-facebook-f"></i> <span data-lang-key="register_facebook"></span></button>
                 </div>
                 <div class="divider"><p>HOẶC</p></div>
                 <form id="register-form">
-                    <input type="email" name="email" placeholder="Địa chỉ Email" required>
-                    <input type="password" name="password" placeholder="Tạo mật khẩu" required>
-                    <button type="submit" class="submit-btn">Đăng ký</button>
+                    <input type="email" name="email" data-placeholder-key="email_address" required>
+                    <input type="password" name="password" data-placeholder-key="create_password" required>
+                    <button type="submit" class="submit-btn" data-lang-key="register"></button>
                 </form>
             </div>
         </div>
     </div>
-    
-    <!-- ======== MODALS & FLOATING BUTTON ======== -->
-    
+
     <!-- Floating "+" Button -->
-    <button id="post-item-btn" class="post-item-btn hidden" aria-label="Đăng tin mới"> 
+    <button id="post-item-btn" class="post-item-btn hidden" data-lang-key-aria="postNew"> 
         <i class="fas fa-plus"></i> 
     </button>
 
@@ -277,58 +428,87 @@
     <div id="add-item-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Thêm sản phẩm cho thuê/pass</h2>
+                <h2 data-lang-key="addItemTitle"></h2>
                 <button class="modal-close-btn">×</button>
             </div>
             <form id="add-item-form">
-                <div class="form-group"><label for="itemName">Tên sản phẩm</label><input type="text" name="itemName" required></div>
-                <div class="form-group"><label for="itemBrand">Thương hiệu</label><input type="text" name="itemBrand"></div>
-                <div class="form-group"><label for="itemCondition">Tình trạng</label><select name="itemCondition" required><option value="New">Mới</option><option value="Like New">Đã dùng - Như mới</option><option value="Good">Đã dùng - Tốt</option><option value="Fair">Đã dùng - Khá</option></select></div>
-                <div class="form-group"><label for="salePrice">Giá bán (VNĐ)</label><input type="number" name="salePrice" placeholder="Để trống nếu chỉ cho tặng"></div>
-                <div class="form-group"><label for="itemDescription">Mô tả</label><textarea name="itemDescription" rows="3" required></textarea></div>
-                <div class="form-group"><label for="itemImage">Hình ảnh</label><input type="file" name="itemImage" accept="image/*" required></div>
-                <button type="submit" class="submit-btn">Đăng sản phẩm</button>
+                <div class="form-group"><label data-lang-key="itemName" for="itemName"></label><input type="text" id="itemName" name="itemName" required></div>
+                <div class="form-group"><label data-lang-key="itemBrand" for="itemBrand"></label><input type="text" id="itemBrand" name="itemBrand"></div>
+                <div class="form-group"><label data-lang-key="itemCondition" for="itemCondition"></label>
+                    <select id="itemCondition" name="itemCondition" required>
+                        <option value="Mới" data-lang-key="conditionNew"></option>
+                        <option value="Đã dùng - Như mới" data-lang-key="conditionLikeNew"></option>
+                        <option value="Đã dùng - Tốt" data-lang-key="conditionGood"></option>
+                        <option value="Đã dùng - Khá" data-lang-key="conditionFair"></option>
+                    </select>
+                </div>
+                <div class="form-group"><label data-lang-key="salePrice" for="salePrice"></label><input type="number" id="salePrice" name="salePrice" data-placeholder-key="price_note"></div>
+                <div class="form-group"><label data-lang-key="itemDescription" for="itemDescription"></label><textarea id="itemDescription" name="itemDescription" rows="3" required></textarea></div>
+                <div class="form-group"><label data-lang-key="itemImage" for="itemImage"></label><input type="file" id="itemImage" name="itemImage" accept="image/*" required></div>
+                <button type="submit" class="submit-btn" data-lang-key="postItemButton"></button>
             </form>
         </div>
     </div>
 
-    <!-- NEW: Modal for Adding Milk Posts -->
+    <!-- Modal for Adding Milk Posts (from Code 2) -->
     <div id="add-milk-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Đăng tin kết nối sữa mẹ</h2>
+                <h2 data-lang-key="addMilkTitle"></h2>
                 <button class="modal-close-btn">×</button>
             </div>
             <form id="add-milk-form">
-                <div class="form-group"><label for="milkTitle">Tiêu đề (ví dụ: "Tặng sữa mẹ trữ đông cho bé")</label><input type="text" name="milkTitle" required></div>
-                <div class="form-group"><label for="milkRegion">Khu vực (Tỉnh/Thành phố)</label><input type="text" name="milkRegion" placeholder="ví dụ: TP. Hồ Chí Minh" required></div>
-                <div class="form-group"><label for="storageDate">Ngày trữ đông</label><input type="date" name="storageDate" required></div>
-                <div class="form-group"><label for="milkNotes">Ghi chú thêm</label><textarea name="milkNotes" rows="3" placeholder="ví dụ: Sữa mẹ vắt hàng ngày, trữ đông đúng quy trình, mẹ không dùng thuốc..."></textarea></div>
-                <div class="form-group"><label for="milkImage">Hình ảnh (nếu có)</label><input type="file" name="milkImage" accept="image/*"></div>
-                <button type="submit" class="submit-btn">Đăng tin</button>
+                <div class="form-group"><label data-lang-key="milkTitleLabel" for="milkTitle"></label><input type="text" id="milkTitle" name="milkTitle" data-placeholder-key="milkTitlePlaceholder" required></div>
+                <div class="form-group"><label data-lang-key="milkRegionLabel" for="milkRegion"></label><input type="text" id="milkRegion" name="milkRegion" data-placeholder-key="milkRegionPlaceholder" required></div>
+                <div class="form-group"><label data-lang-key="storageDateLabel" for="storageDate"></label><input type="date" id="storageDate" name="storageDate" required></div>
+                <div class="form-group"><label data-lang-key="milkNotesLabel" for="milkNotes"></label><textarea id="milkNotes" name="milkNotes" rows="3" data-placeholder-key="milkNotesPlaceholder"></textarea></div>
+                <div class="form-group"><label data-lang-key="itemImage" for="milkImage"></label><input type="file" id="milkImage" name="milkImage" accept="image/*"></div>
+                <button type="submit" class="submit-btn" data-lang-key="postMilkButton"></button>
             </form>
         </div>
     </div>
 
+    <!-- ======== Floating Chat Widget (from Code 1) ======== -->
+    <div id="floating-chat-widget" class="hidden">
+        <div id="chat-window">
+            <div class="chat-header">
+                <span data-lang-key="scan"></span>
+                <button class="chat-close-btn">×</button>
+            </div>
+            <div class="chat-messages" id="chat-messages-box"></div>
+            <div class="chat-input-area">
+                <input type="file" id="image-upload-input" class="hidden" accept="image/*">
+                <label for="image-upload-input" class="image-upload-label"> 
+                    <button type="button" aria-label="Attach Image"><i class="fas fa-paperclip"></i></button> 
+                </label>
+                <textarea id="chat-text-input" data-placeholder-key="type_message" rows="1"></textarea>
+                <button type="button" id="send-chat-btn" aria-label="Send Message"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button id="chat-toggle-btn" aria-label="Open Chat">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
 
-    <!-- ========================== JAVASCRIPT SECTION ======================== -->
+    <!-- ========================== JAVASCRIPT SECTION (MERGED) ======================== -->
+
+    <!-- Firebase SDKs (from Code 2) -->
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-storage-compat.js"></script>
 
     <script>
+        // --- 1. FIREBASE CONFIGURATION (from Code 2) ---
+        // QUAN TRỌNG: Thay thế bằng cấu hình Firebase của dự án của bạn.
         const firebaseConfig = {
-  apiKey: "AIzaSyDTa9lu-HcrhdkiQXHa9-E0Glj_7f6rnRc",
-  authDomain: "mam-2-c06f4.firebaseapp.com",
-  projectId: "mam-2-c06f4",
-  // === SỬA LẠI DÒNG NÀY ===
-  storageBucket: "mam-2-c06f4.firebasestorage.app", 
-  // ==========================
-  messagingSenderId: "494501201303",
-  appId: "1:494501201303:web:f32f75d93042964ae5f0d2",
-  measurementId: "G-56FZ0TK2FP"
-};
+          apiKey: "AIzaSyDTa9lu-HcrhdkiQXHa9-E0Glj_7f6rnRc",
+          authDomain: "mam-2-c06f4.firebaseapp.com",
+          projectId: "mam-2-c06f4",
+          storageBucket: "mam-2-c06f4.appspot.com",
+          messagingSenderId: "494501201303",
+          appId: "1:494501201303:web:f32f75d93042964ae5f0d2"
+        };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
@@ -337,13 +517,125 @@
         const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
         document.addEventListener('DOMContentLoaded', function() {
-            // --- UI Elements ---
+
+            // --- 2. GEMINI API KEY (from Code 1) ---
+            // QUAN TRỌNG: Thay thế bằng khóa API Gemini thực tế của bạn.
+            const GEMINI_API_KEY = "YOUR_API_KEY_HERE";
+
+            // --- 3. LANGUAGE & TRANSLATION (from Code 1, expanded) ---
+            const translations = {
+                en: {
+                    slogan: "The first buds of life, enough milk - enough things - enough love", start: "Start", about: "About Us", connect: "Breast Milk", rent: "Rent/Pass", handbook: "Handbook", scan: "AI Consultant", login: "Login", register: "Register", explore: "explore", logout: "Logout",
+                    aboutText1: "Parenthood is a beautiful journey - but also full of pressure. When breast milk is insufficient or of poor quality. When you have to choose between raising a child well and balancing finances. When you're not sure which milk is real and which is fake - and 'milk pirates' take advantage of trust. When you have too many questions and don't know who to ask. When baby items quickly become redundant - while someone else is in need. For single fathers, the worries are even greater: juggling work, childcare, and being confused by hundreds of products, choices, and conflicting advice. Without a mother's presence, every decision is harder - and lonelier.",
+                    scrollBanner: "măm accompanying baby and parents • ",
+                    aboutText2: "Mam was born as a community for you – where breast milk is shared transparently, where baby items are passed on at the right time, where you find support, experience, and connection from fathers and mothers who have been and are on the parenting journey. We believe that when parents support each other, no child is left behind.",
+                    contactUs: "Contact Us", comingSoon: "Content for this page is coming soon.",
+                    connect_title: "Connecting Breast Milk", rent_title: "Rent - Pass Items", handbook_title: "Parenting Handbook",
+                    feature_paragraph_connect: "Lack of quality milk, fear of fake milk, and waste of surplus milk are things many mothers face. Besides, single fathers and parents who adopt find it difficult to find breast milk. With Măm, mothers can share or receive breast milk transparently – ensuring safety, checking origin, nearby locations, and no commercialization. Măm is a reliable bridge for kindness to be spread correctly, to the right people.",
+                    feature_paragraph_rent: "Newborn items are often used for a short time but are expensive and take up space. Many mothers want to save money or share good used items but lack a reliable place to connect. With Măm, renting or passing on cribs, strollers, breast pumps... becomes easy, clear, and safe. No more waste, no more clutter — just convenience and kindness among mothers.",
+                    feature_paragraph_handbook: "First-time parenting always comes with worries: why is the baby crying? Forgetting vaccination schedules? How to raise a child correctly at each stage? Măm's Handbook section accompanies parents through each of the baby's developmental milestones, reminding them of vaccination schedules, sharing practical experiences, and explaining child behavior in an easy-to-understand way – to make the parenting journey more confident and gentle.",
+                    more_button: "Learn More",
+                    // New from Code 2
+                    connect_title_main: "Breast Milk Connection", rent_title_main: "Rent - Pass Items",
+                    login_account: "Login to your Account", register_account: "Create New Account",
+                    login_google: "Login with Google", login_facebook: "Login with Facebook",
+                    register_google: "Register with Google", register_facebook: "Register with Facebook",
+                    password: "Password", email_address: "Email Address", create_password: "Create Password",
+                    postNew: "Post new item",
+                    addItemTitle: "Add New Rent/Pass Item", addMilkTitle: "Post a Milk Connection",
+                    itemName: "Product Name", itemBrand: "Brand", itemCondition: "Condition",
+                    conditionNew: "New", conditionLikeNew: "Used - Like New", conditionGood: "Used - Good", conditionFair: "Used - Fair",
+                    salePrice: "Sale Price (VND)", price_note: "Leave blank if for free",
+                    itemDescription: "Description", itemImage: "Image", postItemButton: "Post Item",
+                    milkTitleLabel: "Title", milkTitlePlaceholder: "e.g., Donating frozen breast milk for baby",
+                    milkRegionLabel: "Region (City/Province)", milkRegionPlaceholder: "e.g., Ho Chi Minh City",
+                    storageDateLabel: "Storage Date", milkNotesLabel: "Additional Notes",
+                    milkNotesPlaceholder: "e.g., Milk expressed daily, properly frozen, mother not on medication...",
+                    postMilkButton: "Post Connection", type_message: "Type your message...",
+                    // Chatbot
+                    aiGreeting: "Hello! I am măm's AI childcare consultant. Please tell me your question, and I'll ask for some details about your child to give the best advice.",
+                    aiAskAge: "To give the best advice, could you please tell me your child's age (e.g., '14 months', '3 years old')?",
+                    aiAskWeight: "Thank you. And what is your child's current weight (e.g., '10kg')?",
+                    aiAskHealth: "Got it. Lastly, could you briefly describe your child's general health (e.g., 'healthy', 'has a slight cough')?",
+                    aiReady: "Thank you for the information! Let me think about your question now...",
+                    aiInvalidAge: "I'm sorry, I didn't quite understand the age. Please provide it in a clear format like '6 months' or '2 years'.",
+                    aiInvalidWeight: "My apologies, I couldn't determine the weight. Please provide it in a clear format like '7kg' or '11.5 kg'.",
+                    aiDisclaimer: "Remember, I am an AI assistant. Always consult a pediatrician for serious health concerns."
+                },
+                vi: {
+                    slogan: "Những mầm non đầu đời, đủ sữa - đủ đồ - đủ đầy yêu thương", start: "Bắt đầu", about: "Về chúng tôi", connect: "Kết nối sữa mẹ", rent: "Thuê - Pass đồ", handbook: "Cẩm nang", scan: "Tư vấn AI", login: "Đăng nhập", register: "Đăng ký", explore: "khám<br>phá", logout: "Đăng xuất",
+                    aboutText1: "Làm cha mẹ là hành trình tuyệt đẹp – nhưng cũng đầy áp lực.Khi sữa mẹ không đủ, hoặc chất lượng kém. Khi phải chọn giữa việc nuôi con tốt hay cân đối tài chính. Khi bạn không chắc đâu là sữa thật, đâu là giả – và những “tặc sữa” lợi dụng lòng tin. Khi bạn có quá nhiều câu hỏi mà không biết hỏi ai. Khi đồ đạc cho con nhanh chóng trở nên thừa thãi – trong khi có người khác lại đang cần.Với những ông bố đơn thân, nỗi lo còn lớn hơn: vừa đi làm, vừa chăm con, vừa bối rối giữa hàng trăm sản phẩm, lựa chọn, và lời khuyên mâu thuẫn. Không có mẹ bên cạnh, mọi quyết định đều khó khăn hơn – và cô đơn hơn.", 
+                    scrollBanner: "măm đồng hành cùng bé và ba mẹ • ", 
+                    aboutText2: "Măm ra đời như một cộng đồng dành cho bạn – nơi sữa mẹ được chia sẻ minh bạch, nơi đồ dùng cho bé được trao tay đúng lúc, nơi bạn tìm thấy sự hỗ trợ, kinh nghiệm và kết nối từ những người cha, người mẹ đã và đang đồng hành trên hành trình nuôi con.Chúng tôi tin rằng: khi cha mẹ cùng hỗ trợ nhau, không đứa trẻ nào bị bỏ lại phía sau.", 
+                    contactUs: "Liên hệ", comingSoon: "Nội dung cho trang này sẽ sớm được cập nhật.",
+                    connect_title: "Kết Nối Sữa Mẹ", rent_title: "Thuê - Pass Đồ", handbook_title: "Cẩm Nang Nuôi Dạy Con", 
+                    feature_paragraph_connect: "Thiếu sữa chất lượng, nỗi lo sữa giả, và sự lãng phí sữa dư là điều mà nhiều bà mẹ đang đối mặt. Bên cạnh đó, những ông bố đơn thân, cha mẹ hiến muộn nhận con nuôi khó khăn với việc tìm kiếm sữa mẹ. Với Măm, các mẹ có thể chia sẻ hoặc nhận sữa mẹ một cách minh bạch – đảm bảo an toàn, kiểm tra nguồn gốc, vị trí gần nhau, và không bị thương mại hóa. Măm là cầu nối tin cậy để lòng tốt được lan tỏa đúng cách, đúng người.",
+                    feature_paragraph_rent: "Đồ dùng cho trẻ sơ sinh thường chỉ sử dụng trong thời gian ngắn nhưng lại tốn kém và chiếm diện tích. Nhiều mẹ muốn tiết kiệm hoặc san sẻ đồ cũ còn tốt, nhưng thiếu nơi tin cậy để kết nối. Với Măm, việc thuê hoặc pass lại nôi, xe đẩy, máy hút sữa... trở nên dễ dàng, rõ ràng và an toàn. Không còn lãng phí, không còn cất đầy nhà — chỉ còn sự tiện lợi và tử tế giữa những người mẹ.",
+                    feature_paragraph_handbook: "Lần đầu làm cha mẹ luôn đi kèm lo lắng: trẻ khóc vì đâu? Quên lịch tiêm chủng? Nuôi con ra sao đúng từng giai đoạn? Chuyên mục Cẩm nang của Măm đồng hành cùng ba mẹ qua từng cột mốc phát triển của bé, nhắc lịch tiêm, chia sẻ kinh nghiệm thực tế và giải thích hành vi trẻ dễ hiểu – để hành trình làm cha mẹ trở nên vững vàng và nhẹ nhàng hơn.",
+                    more_button: "Tìm hiểu thêm",
+                    // New from Code 2
+                    connect_title_main: "Kết Nối Sữa Mẹ", rent_title_main: "Thuê - Pass Đồ",
+                    login_account: "Đăng nhập vào tài khoản", register_account: "Tạo tài khoản mới",
+                    login_google: "Đăng nhập với Google", login_facebook: "Đăng nhập với Facebook",
+                    register_google: "Đăng ký với Google", register_facebook: "Đăng ký với Facebook",
+                    password: "Mật khẩu", email_address: "Địa chỉ Email", create_password: "Tạo mật khẩu",
+                    postNew: "Đăng tin mới",
+                    addItemTitle: "Thêm sản phẩm cho thuê/pass", addMilkTitle: "Đăng tin kết nối sữa mẹ",
+                    itemName: "Tên sản phẩm", itemBrand: "Thương hiệu", itemCondition: "Tình trạng",
+                    conditionNew: "Mới", conditionLikeNew: "Đã dùng - Như mới", conditionGood: "Đã dùng - Tốt", conditionFair: "Đã dùng - Khá",
+                    salePrice: "Giá bán (VNĐ)", price_note: "Để trống nếu cho tặng",
+                    itemDescription: "Mô tả", itemImage: "Hình ảnh", postItemButton: "Đăng sản phẩm",
+                    milkTitleLabel: "Tiêu đề", milkTitlePlaceholder: "ví dụ: Tặng sữa mẹ trữ đông cho bé",
+                    milkRegionLabel: "Khu vực (Tỉnh/Thành phố)", milkRegionPlaceholder: "ví dụ: TP. Hồ Chí Minh",
+                    storageDateLabel: "Ngày trữ đông", milkNotesLabel: "Ghi chú thêm",
+                    milkNotesPlaceholder: "ví dụ: Sữa mẹ vắt hàng ngày, trữ đông đúng quy trình...",
+                    postMilkButton: "Đăng tin", type_message: "Nhập tin nhắn của bạn...",
+                    // Chatbot
+                    aiGreeting: "Xin chào! Tôi là trợ lý AI tư vấn nuôi dạy con của măm. Bạn hãy cho tôi biết câu hỏi của bạn, tôi sẽ hỏi một vài thông tin về bé để đưa ra tư vấn tốt nhất nhé.",
+                    aiAskAge: "Để đưa ra lời khuyên tốt nhất, bạn vui lòng cho tôi biết tuổi của bé được không (ví dụ: '14 tháng', '3 tuổi')?",
+                    aiAskWeight: "Cảm ơn bạn. Bé nhà mình hiện nặng bao nhiêu kg ạ (ví dụ: '10kg')?",
+                    aiAskHealth: "Tôi hiểu rồi. Cuối cùng, bạn có thể mô tả sơ qua về tình hình sức khỏe chung của bé không (ví dụ: 'khỏe mạnh', 'đang ho nhẹ')?",
+                    aiReady: "Cảm ơn bạn đã cung cấp thông tin! Bây giờ hãy để tôi suy nghĩ về câu hỏi của bạn nhé...",
+                    aiInvalidAge: "Xin lỗi, tôi chưa hiểu rõ về tuổi của bé. Bạn vui lòng cung cấp dưới dạng như '6 tháng' hoặc '2 tuổi' nhé.",
+                    aiInvalidWeight: "Xin lỗi, tôi chưa xác định được cân nặng. Bạn vui lòng cung cấp dưới dạng như '7kg' hoặc '11.5 kg' nhé.",
+                    aiDisclaimer: "Lưu ý: Tôi là một trợ lý AI. Hãy luôn tham khảo ý kiến bác sĩ nhi khoa cho các vấn đề sức khỏe nghiêm trọng."
+                }
+            };
+
+            let currentLang = 'vi';
+            const typeText = (element, text) => { if (!element) return; element.innerHTML = ''; let i = 0; const cursor = document.createElement('span'); cursor.className = 'cursor'; cursor.innerHTML = ' '; element.appendChild(cursor); const typing = setInterval(() => { if (i < text.length) { cursor.insertAdjacentText('beforebegin', text.charAt(i)); i++; } else { clearInterval(typing); cursor.style.animation = 'blink 1s infinite'; } }, 50); };
+            
+            const setLanguage = (lang) => { 
+                currentLang = lang; 
+                document.querySelectorAll('[data-lang-key]').forEach(el => { 
+                    const key = el.dataset.langKey; 
+                    const text = translations[lang][key] || ''; 
+                    if (el.classList.contains('slogan')) { typeText(el, text); } 
+                    else if (key === 'explore') { el.innerHTML = text; } 
+                    else { el.textContent = text; } 
+                });
+                document.querySelectorAll('[data-lang-key-aria]').forEach(el => {
+                    const key = el.dataset.langKeyAria;
+                    const text = translations[lang][key] || '';
+                    el.setAttribute('aria-label', text);
+                });
+                document.querySelectorAll('[data-placeholder-key]').forEach(el => {
+                    const key = el.dataset.placeholderKey;
+                    const text = translations[lang][key] || '';
+                    el.placeholder = text;
+                });
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang)); 
+            };
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang)));
+
+            // --- 4. UI ELEMENTS & NAVIGATION (MERGED LOGIC) ---
             const pages = document.querySelectorAll('body > div[id^="page"]');
             const mainHeader = document.getElementById('mainHeader');
-            const navLinks = document.querySelectorAll('.nav-item, .nav-logo');
-            let lastPageId = 'page1';
+            const navLinks = document.querySelectorAll('.nav-item, .nav-logo, .more-button');
+            const footerTemplate = document.getElementById('contact-footer-template');
+            const floatingChatWidget = document.getElementById('floating-chat-widget');
             
-            // Auth UI
+            // Auth UI Elements
             const authLinks = document.getElementById('auth-links');
             const userProfile = document.getElementById('user-profile');
             const userAvatar = document.getElementById('user-avatar');
@@ -352,86 +644,91 @@
 
             // Floating Button & Modals
             const postItemBtn = document.getElementById('post-item-btn');
-            const addItemModal = document.getElementById('add-item-modal');
-            const addMilkModal = document.getElementById('add-milk-modal');
-            const addItemForm = document.getElementById('add-item-form');
-            const addMilkForm = document.getElementById('add-milk-form');
+            
+            let lastPageId = 'page1';
 
-            // --- Page Navigation ---
-            function showPage(pageId) {
-                if (pageId !== 'page8') lastPageId = document.querySelector('body > div[id^="page"]:not(.hidden)')?.id || 'page1';
+                       function showPage(pageId, action) {
+                let currentPageId = document.querySelector('body > div[id^="page"]:not(.hidden)')?.id || lastPageId;
+                if (pageId !== 'page8') { lastPageId = currentPageId; }
                 
                 pages.forEach(page => page.classList.add('hidden'));
                 const targetPage = document.getElementById(pageId);
-                if (targetPage) targetPage.classList.remove('hidden');
-
+                
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                    
+                    if(pageId === 'page8'){ 
+                        if (action === 'show-register') { document.getElementById('show-register-btn').click(); } 
+                        else { document.getElementById('show-login-btn').click(); } 
+                    } else { 
+                        const existingFooter = targetPage.querySelector('.contact-footer'); 
+                        if (existingFooter) existingFooter.remove(); 
+                        if (!['page1', 'page2'].includes(pageId)) { 
+                            targetPage.appendChild(footerTemplate.content.cloneNode(true)); 
+                        } 
+                    }
+                }
+                
                 mainHeader.classList.toggle('hidden', ['page1', 'page2', 'page8'].includes(pageId));
+                if (floatingChatWidget) floatingChatWidget.classList.toggle('hidden', ['page1', 'page2'].includes(pageId));
+                
                 navLinks.forEach(link => link.classList.toggle('active', link.dataset.target === pageId));
                 window.scrollTo(0, 0);
 
-                // Manage floating button visibility and function
+                // --- START: SỬA LỖI LOGIC ---
                 const isLoggedIn = auth.currentUser;
                 const onContentPage = ['page4', 'page5'].includes(pageId);
                 postItemBtn.classList.toggle('hidden', !isLoggedIn || !onContentPage);
 
                 if (isLoggedIn && onContentPage) {
+                    // SỬA LỖI: Đảm bảo trang nào mở đúng modal của trang đó.
+                    // Trang 4 (sữa) mở modal sữa. Trang 5 (đồ) mở modal đồ.
                     postItemBtn.dataset.modalTarget = (pageId === 'page4') ? 'add-milk-modal' : 'add-item-modal';
                 }
 
-                if (pageId === 'page4') displayMilkPosts();
-                if (pageId === 'page5') displayProducts();
-            }
+                // SỬA LỖI: Đảm bảo trang nào hiển thị đúng nội dung của trang đó.
+                if (pageId === 'page4') displayMilkPosts(); // Trang 4 hiển thị bài đăng sữa.
+                if (pageId === 'page5') displayProducts();  // Trang 5 hiển thị sản phẩm.
+                // --- END: SỬA LỖI LOGIC ---
 
+                setLanguage(currentLang); // Refresh language on page change
+            }
+            
             document.getElementById('startButton').addEventListener('click', () => showPage('page2'));
-            document.querySelectorAll('[data-target]').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showPage(link.dataset.target);
-                    // Handle login/register actions from header
-                    if (link.dataset.action === 'show-login') document.getElementById('show-login-btn').click();
-                    if (link.dataset.action === 'show-register') document.getElementById('show-register-btn').click();
-                });
-            });
-            document.getElementById('close-login-page-btn').addEventListener('click', (e) => { e.preventDefault(); showPage(lastPageId); });
+            navLinks.forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); showPage(link.dataset.target, link.dataset.action); }));
 
-            // Carousel Logic
-            const items = document.querySelectorAll('.carousel-item');
-            let currentIndex = 0;
-            function updateCarousel() {
-                if(items.length === 0) return;
-                items.forEach((item, index) => {
-                    item.classList.remove('active', 'prev', 'next');
-                    if (index === currentIndex) item.classList.add('active');
-                    else if (index === (currentIndex - 1 + items.length) % items.length) item.classList.add('prev');
-                    else if (index === (currentIndex + 1) % items.length) item.classList.add('next');
-                });
-            }
-            document.getElementById('nextBtn')?.addEventListener('click', () => { currentIndex = (currentIndex + 1) % items.length; updateCarousel(); });
-            document.getElementById('prevBtn')?.addEventListener('click', () => { currentIndex = (currentIndex - 1 + items.length) % items.length; updateCarousel(); });
-            new MutationObserver((mutations) => { if(!mutations[0].target.classList.contains('hidden')){ currentIndex=0; updateCarousel(); } }).observe(document.getElementById('page2'), { attributes: true });
-
-
-            // --- Authentication Logic ---
+            // --- 5. AUTHENTICATION (from Code 2) ---
             auth.onAuthStateChanged(user => {
+                const currentPageId = document.querySelector('body > div[id^="page"]:not(.hidden)')?.id || 'page1';
                 if (user) {
                     // User is signed in
                     authLinks.classList.add('hidden');
                     userProfile.classList.remove('hidden');
                     userName.textContent = user.displayName || user.email.split('@')[0];
-                    userAvatar.src = user.photoURL || 'https://via.placeholder.com/40'; // Default avatar
-                    showPage(lastPageId === 'page1' ? 'page2' : lastPageId);
+                    userAvatar.src = user.photoURL || 'https://via.placeholder.com/40';
+                    if (currentPageId === 'page8') {
+                        showPage(lastPageId !== 'page8' ? lastPageId : 'page2');
+                    } else {
+                        showPage(currentPageId);
+                    }
                 } else {
                     // User is signed out
                     authLinks.classList.remove('hidden');
                     userProfile.classList.add('hidden');
                     postItemBtn.classList.add('hidden');
+                    if (!['page1', 'page8'].includes(currentPageId)) {
+                        showPage(currentPageId);
+                    }
                 }
-                // Refresh content on current page to reflect login status
-                const currentPage = document.querySelector('body > div[id^="page"]:not(.hidden)');
-                if (currentPage) showPage(currentPage.id);
             });
-            
-            logoutBtn.addEventListener('click', () => auth.signOut().then(() => showPage('page1')));
+
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                auth.signOut().then(() => {
+                    lastPageId = 'page1';
+                    showPage('page1');
+                });
+            });
 
             const socialLogin = provider => {
                 auth.signInWithPopup(provider).catch(error => alert(`Đăng nhập thất bại: ${error.message}`));
@@ -441,80 +738,86 @@
             document.getElementById('google-register-btn').addEventListener('click', () => socialLogin(googleProvider));
             document.getElementById('facebook-register-btn').addEventListener('click', () => socialLogin(facebookProvider));
             
-            // Login/Register with Email
             document.getElementById('login-form').addEventListener('submit', e => { e.preventDefault(); auth.signInWithEmailAndPassword(e.target.email.value, e.target.password.value).catch(err => alert(err.message)); });
             document.getElementById('register-form').addEventListener('submit', e => { e.preventDefault(); auth.createUserWithEmailAndPassword(e.target.email.value, e.target.password.value).catch(err => alert(err.message)); });
             
-            // Login/Register tab switching
-            const loginContainer = document.getElementById('login-form-container');
-            const registerContainer = document.getElementById('register-form-container');
             const showLoginBtn = document.getElementById('show-login-btn');
             const showRegisterBtn = document.getElementById('show-register-btn');
-            showLoginBtn.addEventListener('click', () => { loginContainer.classList.remove('hidden'); registerContainer.classList.add('hidden'); showLoginBtn.classList.add('active'); showRegisterBtn.classList.remove('active'); });
-            showRegisterBtn.addEventListener('click', () => { loginContainer.classList.add('hidden'); registerContainer.classList.remove('hidden'); showLoginBtn.classList.remove('active'); showRegisterBtn.classList.add('active'); });
+            const loginContainer = document.getElementById('login-form-container');
+            const registerContainer = document.getElementById('register-form-container');
+            const closeLoginPageBtn = document.getElementById('close-login-page-btn');
+            if(showLoginBtn) showLoginBtn.addEventListener('click', () => { loginContainer.classList.remove('hidden'); registerContainer.classList.add('hidden'); showLoginBtn.classList.add('active'); showRegisterBtn.classList.remove('active'); });
+            if(showRegisterBtn) showRegisterBtn.addEventListener('click', () => { loginContainer.classList.add('hidden'); registerContainer.classList.remove('hidden'); showLoginBtn.classList.remove('active'); showRegisterBtn.classList.add('active'); });
+            if(closeLoginPageBtn) closeLoginPageBtn.addEventListener('click', (e) => { e.preventDefault(); showPage(lastPageId); });
 
-
-            // --- Real-time Data Display ---
+            // --- 6. REAL-TIME DATA & FORMS (from Code 2) ---
             function displayProducts() {
                 const grid = document.getElementById('product-grid');
+                if(!grid) return;
                 db.collection('products').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+                    let content = '';
                     if (snapshot.empty) {
-                        grid.innerHTML = '<p>Chưa có sản phẩm nào. Hãy là người đầu tiên đăng bán!</p>';
-                        return;
-                    }
-                    grid.innerHTML = '';
-                    snapshot.forEach(doc => {
-                        const product = doc.data();
-                        const price = product.salePrice ? `${Number(product.salePrice).toLocaleString('vi-VN')} VNĐ` : 'Cho tặng';
-                        grid.innerHTML += `
-                            <div class="item-box">
-                                <div class="item-image" style="background-image: url('${product.imageUrl}');"></div>
-                                <div class="item-info">
-                                    <h3 class="item-name">${product.name}</h3>
-                                    <p class="item-price">${price}</p>
-                                    <div class="item-details">
-                                        <span><strong>Thương hiệu:</strong> ${product.brand || 'N/A'}</span>
-                                        <span><strong>Tình trạng:</strong> ${product.condition}</span>
+                        content = `<div class="placeholder-page"><p>${translations[currentLang].comingSoon}</p></div>`;
+                    } else {
+                        snapshot.forEach(doc => {
+                            const product = doc.data();
+                            const price = product.salePrice && product.salePrice > 0 ? `${Number(product.salePrice).toLocaleString('vi-VN')} VNĐ` : 'Cho tặng';
+                            content += `
+                                <div class="item-box">
+                                    <div class="item-image" style="background-image: url('${product.imageUrl || 'https://via.placeholder.com/300x250?text=măm'}');"></div>
+                                    <div class="item-info">
+                                        <h3 class="item-name">${product.itemName || 'Chưa có tên'}</h3>
+                                        <p class="item-price">${price}</p>
+                                        <div class="item-details">
+                                            <span><strong>Thương hiệu:</strong> ${product.itemBrand || 'Không rõ'}</span>
+                                            <span><strong>Tình trạng:</strong> ${product.itemCondition || 'Không rõ'}</span>
+                                        </div>
+                                        <button class="contact-owner-btn" onclick="alert('Liên hệ người bán qua email: ${product.ownerEmail}')">Liên hệ người bán</button>
                                     </div>
-                                    <button class="contact-owner-btn" onclick="alert('Liên hệ: ${product.ownerEmail}')">Liên hệ người bán</button>
-                                </div>
-                            </div>`;
-                    });
+                                </div>`;
+                        });
+                    }
+                    grid.innerHTML = content;
                 }, error => console.error("Error fetching products:", error));
             }
 
             function displayMilkPosts() {
                 const grid = document.getElementById('milk-post-grid');
+                if(!grid) return;
                 db.collection('milk_posts').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+                    let content = '';
                     if (snapshot.empty) {
-                        grid.innerHTML = '<p>Chưa có tin đăng nào. Hãy là người đầu tiên kết nối!</p>';
-                        return;
-                    }
-                    grid.innerHTML = '';
-                    snapshot.forEach(doc => {
-                        const post = doc.data();
-                        const imageUrl = post.imageUrl || 'https://via.placeholder.com/300x250?text=Sữa+mẹ';
-                        grid.innerHTML += `
-                            <div class="item-box">
-                                <div class="item-image" style="background-image: url('${imageUrl}');"></div>
-                                <div class="item-info">
-                                    <h3 class="item-name">${post.title}</h3>
-                                    <div class="item-details">
-                                        <span><strong>Khu vực:</strong> ${post.region}</span>
-                                        <span><strong>Ngày trữ:</strong> ${post.storageDate}</span>
-                                        <span><strong>Ghi chú:</strong> ${post.notes || 'Không có'}</span>
+                        content = `<div class="placeholder-page"><p>${translations[currentLang].comingSoon}</p></div>`;
+                    } else {
+                        snapshot.forEach(doc => {
+                            const post = doc.data();
+                            const imageUrl = post.imageUrl || 'https://via.placeholder.com/300x250?text=Sữa+mẹ';
+                            content += `
+                                <div class="item-box">
+                                    <div class="item-image" style="background-image: url('${imageUrl}');"></div>
+                                    <div class="item-info">
+                                        <h3 class="item-name">${post.milkTitle || 'Chưa có tiêu đề'}</h3>
+                                        <div class="item-details">
+                                            <span><strong>Khu vực:</strong> ${post.milkRegion || 'Không rõ'}</span>
+                                            <span><strong>Ngày trữ:</strong> ${post.storageDate || 'Không rõ'}</span>
+                                            <span><strong>Ghi chú:</strong> ${post.milkNotes || 'Không có'}</span>
+                                        </div>
+                                        <button class="contact-owner-btn" onclick="alert('Liên hệ người tặng qua email: ${post.ownerEmail}')">Liên hệ người tặng</button>
                                     </div>
-                                    <button class="contact-owner-btn" onclick="alert('Liên hệ: ${post.ownerEmail}')">Liên hệ</button>
-                                </div>
-                            </div>`;
-                    });
+                                </div>`;
+                        });
+                    }
+                    grid.innerHTML = content;
                 }, error => console.error("Error fetching milk posts:", error));
             }
-
-            // --- Modals and Forms Logic ---
+            
             postItemBtn.addEventListener('click', () => {
                 const modalId = postItemBtn.dataset.modalTarget;
-                document.getElementById(modalId)?.classList.add('visible');
+                const targetModal = document.getElementById(modalId);
+                if (targetModal) {
+                    targetModal.classList.add('visible');
+                    setLanguage(currentLang); // Ensure modal text is in correct language
+                }
             });
 
             document.querySelectorAll('.modal-overlay').forEach(modal => {
@@ -527,19 +830,26 @@
 
             const handleFormSubmit = async (form, collectionName, fileInputName) => {
                 const user = auth.currentUser;
-                if (!user) return alert('Bạn cần đăng nhập để đăng tin!');
+                if (!user) {
+                    alert('Bạn cần đăng nhập để đăng tin!');
+                    return;
+                }
 
                 const submitButton = form.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.textContent;
                 submitButton.disabled = true;
                 submitButton.textContent = 'Đang xử lý...';
 
                 try {
-                    const file = form.querySelector(`input[name="${fileInputName}"]`).files[0];
+                    const fileInput = form.querySelector(`input[name="${fileInputName}"]`);
+                    const file = fileInput ? fileInput.files[0] : null;
+
                     let downloadURL = null;
                     if (file) {
                         const filePath = `${collectionName}/${user.uid}/${Date.now()}_${file.name}`;
-                        const snapshot = await storage.ref(filePath).put(file);
-                        downloadURL = await snapshot.ref.getDownloadURL();
+                        const fileRef = storage.ref(filePath);
+                        await fileRef.put(file);
+                        downloadURL = await fileRef.getDownloadURL();
                     }
 
                     const formData = new FormData(form);
@@ -551,7 +861,9 @@
                     for (let [key, value] of formData.entries()) {
                        if (key !== fileInputName) data[key] = value;
                     }
-                    if (downloadURL) data.imageUrl = downloadURL;
+                    if (downloadURL) {
+                        data.imageUrl = downloadURL;
+                    }
 
                     await db.collection(collectionName).add(data);
                     alert('Đăng tin thành công!');
@@ -562,15 +874,98 @@
                     alert(`Đã xảy ra lỗi: ${error.message}`);
                 } finally {
                     submitButton.disabled = false;
-                    submitButton.textContent = 'Đăng tin';
+                    submitButton.textContent = originalButtonText;
                 }
             };
             
-            addItemForm.addEventListener('submit', e => { e.preventDefault(); handleFormSubmit(addItemForm, 'products', 'itemImage'); });
-            addMilkForm.addEventListener('submit', e => { e.preventDefault(); handleFormSubmit(addMilkForm, 'milk_posts', 'milkImage'); });
+            document.getElementById('add-item-form').addEventListener('submit', e => { e.preventDefault(); handleFormSubmit(e.target, 'products', 'itemImage'); });
+            document.getElementById('add-milk-form').addEventListener('submit', e => { e.preventDefault(); handleFormSubmit(e.target, 'milk_posts', 'milkImage'); });
 
 
-            // --- Initial Load ---
+            // --- 7. CAROUSEL & OTHER UI LOGIC (from Code 1) ---
+            const items = document.querySelectorAll('.carousel-item');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentIndex = 0;
+            function updateCarousel() { if (items.length === 0) return; const totalItems = items.length; const prevIndex = (currentIndex - 1 + totalItems) % totalItems; const nextIndex = (currentIndex + 1) % totalItems; items.forEach((item, index) => { item.classList.remove('active', 'prev', 'next'); if (index === currentIndex) item.classList.add('active'); else if (index === prevIndex) item.classList.add('prev'); else if (index === nextIndex) item.classList.add('next'); }); }
+            function navigateCarousel(direction) { currentIndex = (currentIndex + direction + items.length) % items.length; updateCarousel(); }
+            if(nextBtn) nextBtn.addEventListener('click', () => navigateCarousel(1));
+            if(prevBtn) prevBtn.addEventListener('click', () => navigateCarousel(-1));
+            items.forEach((item) => { 
+                item.addEventListener('click', () => { if (item.classList.contains('active')) showPage(item.dataset.target); else if (item.classList.contains('next')) navigateCarousel(1); else if (item.classList.contains('prev')) navigateCarousel(-1); }); 
+                const imageWrapper = item.querySelector('.image-wrapper');
+                if (imageWrapper) {
+                    imageWrapper.addEventListener('mousemove', (e) => { 
+                        if(item.classList.contains('active')){ const follower = item.querySelector('.discovery-follower'); const rect = e.currentTarget.getBoundingClientRect(); follower.style.left = `${e.clientX - rect.left}px`; follower.style.top = `${e.clientY - rect.top}px`; } 
+                    }); 
+                }
+            });
+            const page2Observer = new MutationObserver((mutations) => { if(!mutations[0].target.classList.contains('hidden')){ currentIndex = 0; updateCarousel(); } });
+            if(document.getElementById('page2')) page2Observer.observe(document.getElementById('page2'), { attributes: true, attributeFilter: ['class'] });
+
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() { if (mainHeader.classList.contains('hidden')) return; let scrollTop = window.pageYOffset || document.documentElement.scrollTop; mainHeader.style.top = (scrollTop > lastScrollTop && scrollTop > 50) ? '-100px' : '0'; lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; }, false);
+
+            // --- 8. CHAT WIDGET LOGIC (from Code 1) ---
+            const chatWindow = document.getElementById('chat-window');
+            const chatToggleButton = document.getElementById('chat-toggle-btn');
+            const chatCloseButton = chatWindow.querySelector('.chat-close-btn');
+            const chatBox = document.getElementById('chat-messages-box');
+            const textInput = document.getElementById('chat-text-input');
+            const sendBtn = document.getElementById('send-chat-btn');
+            
+            let chatState = {};
+            let isChatInitialized = false;
+
+            function initializeChat() {
+                chatBox.innerHTML = '';
+                chatState = { conversationStage: 'GREETING', childAge: null, childWeight: null, childHealth: null, originalQuestion: null };
+                displayAIMessage(translations[currentLang].aiGreeting);
+                isChatInitialized = true;
+            }
+
+            if(chatToggleButton) chatToggleButton.addEventListener('click', () => {
+                chatWindow.classList.toggle('visible');
+                if (chatWindow.classList.contains('visible') && !isChatInitialized) { initializeChat(); }
+            });
+            if(chatCloseButton) chatCloseButton.addEventListener('click', () => { chatWindow.classList.remove('visible'); });
+
+            function displayAIMessage(text, isThinking = false) { const msgDiv = document.createElement('div'); msgDiv.className = 'message ai-message'; msgDiv.textContent = text; if(isThinking) { msgDiv.id = 'thinking-message'; } chatBox.appendChild(msgDiv); chatBox.scrollTop = chatBox.scrollHeight; return msgDiv; }
+            function displayUserMessage(text) { const userMsgDiv = document.createElement('div'); userMsgDiv.className = 'message user-message'; const textNode = document.createElement('span'); textNode.textContent = text; userMsgDiv.appendChild(textNode); chatBox.appendChild(userMsgDiv); chatBox.scrollTop = chatBox.scrollHeight; }
+            function extractInfo(text, regex, group = 1) { const match = text.toLowerCase().match(regex); return match ? match[group] : null; }
+            const handleConversation = (text) => {
+                displayUserMessage(text);
+                switch (chatState.conversationStage) {
+                    case 'GREETING': chatState.originalQuestion = text; displayAIMessage(translations[currentLang].aiAskAge); chatState.conversationStage = 'AWAITING_AGE'; break;
+                    case 'AWAITING_AGE': const age = extractInfo(text, /\b(\d+\s*(?:tháng|tuổi|month|year)s?)\b/); if (age) { chatState.childAge = age; displayAIMessage(translations[currentLang].aiAskWeight); chatState.conversationStage = 'AWAITING_WEIGHT'; } else { displayAIMessage(translations[currentLang].aiInvalidAge); } break;
+                    case 'AWAITING_WEIGHT': const weight = extractInfo(text, /\b(\d+(?:[.,]\d+)?\s*k?g)\b/); if (weight) { chatState.childWeight = weight; displayAIMessage(translations[currentLang].aiAskHealth); chatState.conversationStage = 'AWAITING_HEALTH'; } else { displayAIMessage(translations[currentLang].aiInvalidWeight); } break;
+                    case 'AWAITING_HEALTH':
+                        chatState.childHealth = text; chatState.conversationStage = 'READY_TO_CONSULT';
+                        const fullPrompt = `You are "măm", a helpful, friendly, and caring AI assistant for a Vietnamese website that supports new parents. Your primary language for responding is Vietnamese. Here is the information about the child: - Age: ${chatState.childAge} - Weight: ${chatState.childWeight} - General Health: ${chatState.childHealth}. The parent's original question is: "${chatState.originalQuestion}". Please provide a comprehensive and caring consultation based on this data. Also, suggest 1-2 types of products (like specific foods, vitamins, or toys) that would be appropriate for this child's age and the context of the question. Always end your response with the medical disclaimer: "${translations.vi.aiDisclaimer}"`;
+                        callGeminiAPI(fullPrompt);
+                        break;
+                    case 'READY_TO_CONSULT':
+                        const followupPrompt = `You are "măm", a helpful AI assistant. Remember the child's details: Age is ${chatState.childAge}, Weight is ${chatState.childWeight}, Health is ${chatState.childHealth}. The parent now has a follow-up question: "${text}". Please answer this question based on the child's information you already have. Keep the response helpful and concise. Always end with the disclaimer: "${translations.vi.aiDisclaimer}"`;
+                        callGeminiAPI(followupPrompt);
+                        break;
+                }
+            };
+            const callGeminiAPI = (prompt) => {
+                if (GEMINI_API_KEY === "YOUR_API_KEY_HERE") { displayAIMessage("Lỗi: Vui lòng thay thế 'YOUR_API_KEY_HERE' bằng Gemini API Key của bạn trong mã JavaScript."); return; }
+                const apiURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
+                const requestBody = { "contents": [{ "parts": [{ "text": prompt }] }] };
+                const thinkingMsg = displayAIMessage('...', true);
+                fetch(apiURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) })
+                .then(response => { if (!response.ok) { return response.json().then(errorData => { throw new Error(`API Error: ${response.status}. ${JSON.stringify(errorData)}`); }); } return response.json(); })
+                .then(data => { const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text; if (responseText) { thinkingMsg.textContent = responseText; } else { throw new Error("Invalid response format from API."); } })
+                .catch(error => { console.error('Error calling Gemini API:', error); thinkingMsg.textContent = "Xin lỗi, tôi đang gặp sự cố khi kết nối với AI. Vui lòng thử lại sau."; });
+            };
+
+            const sendMessage = () => { const text = textInput.value.trim(); if (text === '') return; handleConversation(text); textInput.value = ''; textInput.focus(); };
+            if(sendBtn) sendBtn.addEventListener('click', sendMessage);
+            if(textInput) textInput.addEventListener('keypress', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
+
+            // --- 9. INITIALIZE ---
             showPage('page1');
         });
     </script>

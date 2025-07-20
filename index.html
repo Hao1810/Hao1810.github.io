@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -126,7 +127,7 @@
         #logout-btn:hover { background-color: rgba(225, 98, 50, 0.2); }
 
         /* --- CONTENT PAGES & ABOUT PAGE (from Code 1) --- */
-        .page-content { padding-top: 100px; padding-bottom: 100px; }
+        .page-content { padding-top: 100px; padding-bottom: 100px; min-height: 100vh; }
         .page-content p { font-family: var(--body-font); }
         
         .about-section .slogan-sub { font-family: var(--body-font); font-size: 1.3rem; color: #333; font-weight: 700; }
@@ -151,9 +152,9 @@
         .feature-section { display: flex; gap: 40px; align-items: center; padding: 50px 10%; }
 
         /* --- DYNAMIC CONTENT STYLES (from Code 2, adapted) --- */
-        .content-container { padding: 20px 5%; }
-        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .page-header h1 { font-family: var(--title-font); font-size: 3.5rem; font-weight: normal; }
+        .content-container { padding: 20px 5%; max-width: 1200px; margin: 0 auto; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; text-align: center; flex-direction: column;}
+        .page-header h1 { font-family: var(--title-font); font-size: 3.5rem; font-weight: normal; margin-bottom: 20px; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
         .item-box { background-color: white; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
         .item-box:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
@@ -163,8 +164,11 @@
         .item-price { font-size: 1.1rem; color: var(--primary-color); font-weight: bold; margin-bottom: 15px; }
         .item-details { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
         .item-details span { display: block; margin-bottom: 5px; font-family: var(--body-font); }
-        .contact-owner-btn { width: 100%; padding: 12px; border: none; background-color: var(--primary-color); color: var(--light-text); border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: auto; transition: background-color 0.3s; font-family: var(--body-font);}
-        .contact-owner-btn:hover { opacity: 0.9; }
+        .item-actions { margin-top: auto; display: flex; gap: 10px; }
+        .action-btn { width: 100%; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: opacity 0.3s; font-family: var(--body-font);}
+        .contact-owner-btn { background-color: var(--green); color: var(--light-text); }
+        .add-to-cart-btn { background-color: var(--primary-color); color: var(--light-text); }
+        .action-btn:hover { opacity: 0.9; }
         .placeholder-page { display: flex; justify-content: center; align-items: center; flex-direction: column; min-height: 60vh; padding: 20px; }
         .placeholder-page p { color: #333; font-size: 1.2rem;}
 
@@ -248,6 +252,133 @@
         .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-family: inherit; font-size: 1rem; }
+
+        /* ======== CART STYLES ======== */
+        .header-cart-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: var(--dark-text);
+            color: var(--light-text);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--body-font);
+            font-weight: bold;
+        }
+        #cart-page-container {
+            display: flex;
+            gap: 30px;
+            padding: 20px 5%;
+        }
+        #cart-items-section { flex: 2; }
+        #delivery-info-section { flex: 1; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+        .cart-item {
+            display: flex;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            gap: 15px;
+            align-items: center;
+        }
+        .cart-item-img { width: 80px; height: 80px; object-fit: cover; border-radius: 5px; }
+        .cart-item-info { flex-grow: 1; }
+        .cart-item-info h4 { margin: 0 0 10px 0; font-family: var(--title-font); color: #333;}
+        .cart-item-info p { margin: 0; color: #666; font-size: 0.9rem; }
+        .cart-item-remove-btn { color: #aaa; cursor: pointer; font-size: 1.2rem; }
+        .cart-item-remove-btn:hover { color: red; }
+
+        @media (max-width: 992px) {
+            #cart-page-container { flex-direction: column; }
+        }
+
+        /* ======== NEW: HANDBOOK PAGE (#page6) STYLES ======== */
+        .handbook-choice-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .handbook-choice-btn {
+            font-family: var(--title-font);
+            font-size: 1.3rem;
+            padding: 15px 30px;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            color: var(--primary-color);
+            background-color: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .handbook-choice-btn:hover {
+            background-color: rgba(225, 98, 50, 0.2);
+        }
+        .handbook-choice-btn.active {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+        }
+        .handbook-form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        #handbook-result-container {
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            white-space: pre-wrap; /* To respect newlines from AI */
+            line-height: 1.7;
+            font-family: var(--body-font);
+            text-align: left;
+        }
+         #handbook-result-container h3 {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-top: 0;
+        }
+        #handbook-result-container ul {
+            padding-left: 20px;
+            list-style: none;
+        }
+         #handbook-result-container li {
+             margin-bottom: 10px;
+         }
+        #handbook-result-container strong {
+            font-family: var(--title-font);
+            color: var(--primary-color);
+            font-weight: normal;
+        }
+        .loading-spinner {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 <body>
@@ -301,7 +432,7 @@
                 <a href="#" class="nav-item" data-target="page6" data-lang-key="handbook"></a>
             </div>
             <div class="nav-right">
-                <!-- Auth links from Code 2, styled by Code 1 -->
+                 <!-- Auth links from Code 2, styled by Code 1 -->
                 <div id="auth-links">
                     <a href="#" class="nav-item" data-target="page8" data-action="show-login" data-lang-key="login"></a>
                     <a href="#" class="nav-item" data-target="page8" data-action="show-register" data-lang-key="register"></a>
@@ -312,7 +443,17 @@
                     <span id="user-name" class="user-name"></span>
                     <a href="#" id="logout-btn" data-lang-key="logout"></a>
                 </div>
-                 <div class="language-selector"><a class="lang-btn" data-lang="en">EN</a> | <a class="lang-btn active" data-lang="vi">VI</a></div>
+                <!-- NEW: Cart Icons -->
+                <div id="product-cart-icon" class="header-cart-icon hidden" data-cart-type="product">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="product-cart-badge" class="cart-badge">0</span>
+                </div>
+                <div id="milk-cart-icon" class="header-cart-icon hidden" data-cart-type="milk">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span id="milk-cart-badge" class="cart-badge">0</span>
+                </div>
+                <!-- Language Selector -->
+                <div class="language-selector"><a class="lang-btn" data-lang="en">EN</a> | <a class="lang-btn active" data-lang="vi">VI</a></div>
             </div>
         </nav>
     </header>
@@ -375,9 +516,58 @@
         </div>
     </div>
 
-    <!-- ======== Page 6: Handbook (Placeholder) ======== -->
+    <!-- ======== Page 6: Handbook (NEW CONTENT) ======== -->
     <div id="page6" class="page-content hidden">
-        <div class="placeholder-page"><h1 data-lang-key="handbook"></h1><p data-lang-key="comingSoon"></p></div>
+        <div class="content-container">
+            <div class="page-header">
+                <h1 data-lang-key="handbook"></h1>
+                <div class="handbook-choice-container">
+                    <button id="show-pregnancy-handbook-btn" class="handbook-choice-btn active" data-lang-key="pregnancy_handbook_title"></button>
+                    <button id="show-postpartum-handbook-btn" class="handbook-choice-btn" data-lang-key="postpartum_handbook_title"></button>
+                </div>
+            </div>
+
+            <!-- Pregnancy Handbook Form -->
+            <div id="pregnancy-form-container" class="handbook-form-container">
+                <form id="pregnancy-handbook-form">
+                    <div class="form-group"><label for="mom-name-preg" data-lang-key="h_mom_name"></label><input type="text" id="mom-name-preg" required></div>
+                    <div class="form-group"><label for="mom-age-preg" data-lang-key="h_mom_age"></label><input type="number" id="mom-age-preg" required></div>
+                    <div class="form-group"><label for="mom-weight-height-preg" data-lang-key="h_mom_weight_height"></label><input type="text" id="mom-weight-height-preg" required></div>
+                    <div class="form-group"><label for="lmp-date" data-lang-key="h_lmp_date"></label><input type="date" id="lmp-date" required></div>
+                    <div class="form-group"><label for="mom-history" data-lang-key="h_mom_history"></label><textarea id="mom-history" rows="2"></textarea></div>
+                    <div class="form-group"><label for="mom-lifestyle" data-lang-key="h_mom_lifestyle"></label><textarea id="mom-lifestyle" rows="2"></textarea></div>
+                    <div class="form-group"><label for="mom-allergies" data-lang-key="h_mom_allergies"></label><textarea id="mom-allergies" rows="2"></textarea></div>
+                    <button type="submit" class="submit-btn" data-lang-key="h_create_btn"></button>
+                </form>
+            </div>
+
+            <!-- Postpartum Handbook Form -->
+            <div id="postpartum-form-container" class="handbook-form-container hidden">
+                <form id="postpartum-handbook-form">
+                    <h3 data-lang-key="h_baby_info"></h3>
+                    <div class="form-group"><label for="baby-name" data-lang-key="h_baby_name"></label><input type="text" id="baby-name" required></div>
+                    <div class="form-group"><label for="baby-nickname" data-lang-key="h_baby_nickname"></label><input type="text" id="baby-nickname"></div>
+                    <div class="form-group"><label for="baby-dob" data-lang-key="h_baby_dob"></label><input type="date" id="baby-dob" required></div>
+                    <div class="form-group"><label for="baby-birth-weight" data-lang-key="h_baby_birth_weight"></label><input type="text" id="baby-birth-weight" required></div>
+                    <div class="form-group"><label for="baby-birth-order" data-lang-key="h_baby_birth_order"></label><input type="text" id="baby-birth-order"></div>
+                    <div class="form-group"><label for="baby-delivery-method" data-lang-key="h_baby_delivery_method"></label><input type="text" id="baby-delivery-method"></div>
+                    <div class="form-group"><label for="baby-vaccines" data-lang-key="h_baby_vaccines"></label><textarea id="baby-vaccines" rows="2"></textarea></div>
+                    <div class="form-group"><label for="baby-care-wishes" data-lang-key="h_baby_care_wishes"></label><textarea id="baby-care-wishes" rows="2"></textarea></div>
+
+                    <h3 data-lang-key="h_mom_info_post"></h3>
+                     <div class="form-group"><label for="mom-name-post" data-lang-key="h_mom_name"></label><input type="text" id="mom-name-post" required></div>
+                    <div class="form-group"><label for="mom-dob-post" data-lang-key="h_mom_dob"></label><input type="date" id="mom-dob-post" required></div>
+                    <div class="form-group"><label for="mom-health-status" data-lang-key="h_mom_health_status"></label><textarea id="mom-health-status" rows="2"></textarea></div>
+                    <div class="form-group"><label for="mom-milk-status" data-lang-key="h_mom_milk_status"></label><textarea id="mom-milk-status" rows="2"></textarea></div>
+                    <div class="form-group"><label for="mom-feeding-plan" data-lang-key="h_mom_feeding_plan"></label><input type="text" id="mom-feeding-plan"></div>
+                    
+                    <button type="submit" class="submit-btn" data-lang-key="h_create_btn"></button>
+                </form>
+            </div>
+
+            <!-- Handbook Result Container -->
+            <div id="handbook-result-container" class="hidden"></div>
+        </div>
     </div>
     
     <!-- ======== Page 8: Login/Register (Structure from Code 2, styled by Code 1) ======== -->
@@ -414,6 +604,43 @@
                     <input type="email" name="email" data-placeholder-key="email_address" required>
                     <input type="password" name="password" data-placeholder-key="create_password" required>
                     <button type="submit" class="submit-btn" data-lang-key="register"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======== NEW: Page 9: Cart Page ======== -->
+    <div id="page9" class="page-content hidden">
+        <div class="page-header content-container">
+            <h1 data-lang-key="cart_title"></h1>
+        </div>
+        <div id="cart-page-container">
+            <div id="cart-items-section">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            <div id="delivery-info-section">
+                <h2 data-lang-key="delivery_info_title"></h2>
+                <form id="delivery-form">
+                    <div class="form-group">
+                        <label for="recipient-name" data-lang-key="recipient_name"></label>
+                        <input type="text" id="recipient-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-phone" data-lang-key="recipient_phone"></label>
+                        <input type="tel" id="recipient-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-address" data-lang-key="recipient_address"></label>
+                        <input type="text" id="recipient-address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment-method" data-lang-key="payment_method"></label>
+                        <select id="payment-method" required>
+                            <option value="cod" data-lang-key="payment_cod"></option>
+                            <option value="bank" data-lang-key="payment_bank"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn" data-lang-key="place_order"></button>
                 </form>
             </div>
         </div>
@@ -490,7 +717,7 @@
         </button>
     </div>
 
-    <!-- ========================== JAVASCRIPT SECTION (MERGED) ======================== -->
+    <!-- ========================== JAVASCRIPT SECTION (MERGED & UPDATED) ======================== -->
 
     <!-- Firebase SDKs (from Code 2) -->
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
@@ -501,14 +728,15 @@
     <script>
         // --- 1. FIREBASE CONFIGURATION (from Code 2) ---
         // QUAN TRỌNG: Thay thế bằng cấu hình Firebase của dự án của bạn.
-        const firebaseConfig = {
-          apiKey: "AIzaSyDTa9lu-HcrhdkiQXHa9-E0Glj_7f6rnRc",
-          authDomain: "mam-2-c06f4.firebaseapp.com",
-          projectId: "mam-2-c06f4",
-          storageBucket: "mam-2-c06f4.appspot.com",
-          messagingSenderId: "494501201303",
-          appId: "1:494501201303:web:f32f75d93042964ae5f0d2"
-        };
+       const firebaseConfig = {
+  apiKey: "AIzaSyDTa9lu-HcrhdkiQXHa9-E0Glj_7f6rnRc",
+  authDomain: "mam-2-c06f4.firebaseapp.com",
+  projectId: "mam-2-c06f4",
+  storageBucket: "mam-2-c06f4.firebasestorage.app",
+  messagingSenderId: "494501201303",
+  appId: "1:494501201303:web:f32f75d93042964ae5f0d2",
+  measurementId: "G-56FZ0TK2FP"
+};
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
@@ -520,9 +748,9 @@
 
             // --- 2. GEMINI API KEY (from Code 1) ---
             // QUAN TRỌNG: Thay thế bằng khóa API Gemini thực tế của bạn.
-            const GEMINI_API_KEY = "YOUR_API_KEY_HERE";
+            const GEMINI_API_KEY = "AIzaSyAS7_OxrBDkgn0bEFMYnxvqsqhbTB5LkNA";
 
-            // --- 3. LANGUAGE & TRANSLATION (from Code 1, expanded) ---
+            // --- 3. LANGUAGE & TRANSLATION (UPDATED) ---
             const translations = {
                 en: {
                     slogan: "The first buds of life, enough milk - enough things - enough love", start: "Start", about: "About Us", connect: "Breast Milk", rent: "Rent/Pass", handbook: "Handbook", scan: "AI Consultant", login: "Login", register: "Register", explore: "explore", logout: "Logout",
@@ -535,7 +763,6 @@
                     feature_paragraph_rent: "Newborn items are often used for a short time but are expensive and take up space. Many mothers want to save money or share good used items but lack a reliable place to connect. With Măm, renting or passing on cribs, strollers, breast pumps... becomes easy, clear, and safe. No more waste, no more clutter — just convenience and kindness among mothers.",
                     feature_paragraph_handbook: "First-time parenting always comes with worries: why is the baby crying? Forgetting vaccination schedules? How to raise a child correctly at each stage? Măm's Handbook section accompanies parents through each of the baby's developmental milestones, reminding them of vaccination schedules, sharing practical experiences, and explaining child behavior in an easy-to-understand way – to make the parenting journey more confident and gentle.",
                     more_button: "Learn More",
-                    // New from Code 2
                     connect_title_main: "Breast Milk Connection", rent_title_main: "Rent - Pass Items",
                     login_account: "Login to your Account", register_account: "Create New Account",
                     login_google: "Login with Google", login_facebook: "Login with Facebook",
@@ -552,7 +779,6 @@
                     storageDateLabel: "Storage Date", milkNotesLabel: "Additional Notes",
                     milkNotesPlaceholder: "e.g., Milk expressed daily, properly frozen, mother not on medication...",
                     postMilkButton: "Post Connection", type_message: "Type your message...",
-                    // Chatbot
                     aiGreeting: "Hello! I am măm's AI childcare consultant. Please tell me your question, and I'll ask for some details about your child to give the best advice.",
                     aiAskAge: "To give the best advice, could you please tell me your child's age (e.g., '14 months', '3 years old')?",
                     aiAskWeight: "Thank you. And what is your child's current weight (e.g., '10kg')?",
@@ -560,7 +786,29 @@
                     aiReady: "Thank you for the information! Let me think about your question now...",
                     aiInvalidAge: "I'm sorry, I didn't quite understand the age. Please provide it in a clear format like '6 months' or '2 years'.",
                     aiInvalidWeight: "My apologies, I couldn't determine the weight. Please provide it in a clear format like '7kg' or '11.5 kg'.",
-                    aiDisclaimer: "Remember, I am an AI assistant. Always consult a pediatrician for serious health concerns."
+                    aiDisclaimer: "Remember, I am an AI assistant. Always consult a pediatrician for serious health concerns.",
+                    label_brand: "Brand:", label_condition: "Condition:", label_region: "Region:", label_storage_date: "Storage Date:", label_notes: "Notes:",
+                    not_specified: "Not specified", for_free: "For Free", no_notes: "None",
+                    contact_seller: "Contact Seller", contact_giver: "Contact Giver", add_to_cart: "Add to Cart",
+                    cart_title: "Your Cart", delivery_info_title: "Delivery Information",
+                    recipient_name: "Recipient's Name", recipient_phone: "Phone Number", recipient_address: "Address",
+                    payment_method: "Payment Method", payment_cod: "Cash on Delivery (COD)", payment_bank: "Bank Transfer",
+                    place_order: "Place Order", item_added_to_cart: "Item added to cart!", item_removed_from_cart: "Item removed from cart.",
+                    order_placed_success: "Order placed successfully! The owner will contact you soon.",
+                    cart_is_empty: "Your cart is empty.",
+                    please_login_cart: "You need to log in to use the cart!",
+                    cannot_add_own_item: "You cannot add your own item to the cart.",
+                    item_in_cart: "This item is already in your cart!",
+                    // Handbook Translations
+                    pregnancy_handbook_title: "Pregnancy Handbook", postpartum_handbook_title: "Postpartum Handbook",
+                    h_mom_name: "Mom's Name", h_mom_age: "Mom's Age", h_mom_weight_height: "Current Weight & Height (e.g., 55kg, 1.6m)",
+                    h_lmp_date: "First Day of Last Period", h_mom_history: "Pregnancy/Medical History", h_mom_lifestyle: "Lifestyle & Dietary Habits",
+                    h_mom_allergies: "Drug/Food Allergies", h_create_btn: "Create Handbook", h_baby_info: "Baby's Information",
+                    h_baby_name: "Baby's Name", h_baby_nickname: "Nickname", h_baby_dob: "Baby's Date of Birth", h_baby_birth_weight: "Birth Weight (e.g., 3.2kg)",
+                    h_baby_birth_order: "Birth Order (e.g., First child)", h_baby_delivery_method: "Delivery Method (e.g., Natural, C-section)",
+                    h_baby_vaccines: "Vaccinations Received (Name, Date)", h_baby_care_wishes: "Care Desires/Goals",
+                    h_mom_info_post: "Mother's Information (Postpartum)", h_mom_dob: "Mom's Date of Birth", h_mom_health_status: "Current Health Status",
+                    h_mom_milk_status: "Breast Milk Status", h_mom_feeding_plan: "Desired Feeding Plan (e.g., Exclusive breastfeeding)"
                 },
                 vi: {
                     slogan: "Những mầm non đầu đời, đủ sữa - đủ đồ - đủ đầy yêu thương", start: "Bắt đầu", about: "Về chúng tôi", connect: "Kết nối sữa mẹ", rent: "Thuê - Pass đồ", handbook: "Cẩm nang", scan: "Tư vấn AI", login: "Đăng nhập", register: "Đăng ký", explore: "khám<br>phá", logout: "Đăng xuất",
@@ -573,7 +821,6 @@
                     feature_paragraph_rent: "Đồ dùng cho trẻ sơ sinh thường chỉ sử dụng trong thời gian ngắn nhưng lại tốn kém và chiếm diện tích. Nhiều mẹ muốn tiết kiệm hoặc san sẻ đồ cũ còn tốt, nhưng thiếu nơi tin cậy để kết nối. Với Măm, việc thuê hoặc pass lại nôi, xe đẩy, máy hút sữa... trở nên dễ dàng, rõ ràng và an toàn. Không còn lãng phí, không còn cất đầy nhà — chỉ còn sự tiện lợi và tử tế giữa những người mẹ.",
                     feature_paragraph_handbook: "Lần đầu làm cha mẹ luôn đi kèm lo lắng: trẻ khóc vì đâu? Quên lịch tiêm chủng? Nuôi con ra sao đúng từng giai đoạn? Chuyên mục Cẩm nang của Măm đồng hành cùng ba mẹ qua từng cột mốc phát triển của bé, nhắc lịch tiêm, chia sẻ kinh nghiệm thực tế và giải thích hành vi trẻ dễ hiểu – để hành trình làm cha mẹ trở nên vững vàng và nhẹ nhàng hơn.",
                     more_button: "Tìm hiểu thêm",
-                    // New from Code 2
                     connect_title_main: "Kết Nối Sữa Mẹ", rent_title_main: "Thuê - Pass Đồ",
                     login_account: "Đăng nhập vào tài khoản", register_account: "Tạo tài khoản mới",
                     login_google: "Đăng nhập với Google", login_facebook: "Đăng nhập với Facebook",
@@ -590,7 +837,6 @@
                     storageDateLabel: "Ngày trữ đông", milkNotesLabel: "Ghi chú thêm",
                     milkNotesPlaceholder: "ví dụ: Sữa mẹ vắt hàng ngày, trữ đông đúng quy trình...",
                     postMilkButton: "Đăng tin", type_message: "Nhập tin nhắn của bạn...",
-                    // Chatbot
                     aiGreeting: "Xin chào! Tôi là trợ lý AI tư vấn nuôi dạy con của măm. Bạn hãy cho tôi biết câu hỏi của bạn, tôi sẽ hỏi một vài thông tin về bé để đưa ra tư vấn tốt nhất nhé.",
                     aiAskAge: "Để đưa ra lời khuyên tốt nhất, bạn vui lòng cho tôi biết tuổi của bé được không (ví dụ: '14 tháng', '3 tuổi')?",
                     aiAskWeight: "Cảm ơn bạn. Bé nhà mình hiện nặng bao nhiêu kg ạ (ví dụ: '10kg')?",
@@ -598,15 +844,38 @@
                     aiReady: "Cảm ơn bạn đã cung cấp thông tin! Bây giờ hãy để tôi suy nghĩ về câu hỏi của bạn nhé...",
                     aiInvalidAge: "Xin lỗi, tôi chưa hiểu rõ về tuổi của bé. Bạn vui lòng cung cấp dưới dạng như '6 tháng' hoặc '2 tuổi' nhé.",
                     aiInvalidWeight: "Xin lỗi, tôi chưa xác định được cân nặng. Bạn vui lòng cung cấp dưới dạng như '7kg' hoặc '11.5 kg' nhé.",
-                    aiDisclaimer: "Lưu ý: Tôi là một trợ lý AI. Hãy luôn tham khảo ý kiến bác sĩ nhi khoa cho các vấn đề sức khỏe nghiêm trọng."
+                    aiDisclaimer: "Lưu ý: Tôi là một trợ lý AI. Hãy luôn tham khảo ý kiến bác sĩ nhi khoa cho các vấn đề sức khỏe nghiêm trọng.",
+                    label_brand: "Thương hiệu:", label_condition: "Tình trạng:", label_region: "Khu vực:", label_storage_date: "Ngày trữ:", label_notes: "Ghi chú:",
+                    not_specified: "Không rõ", for_free: "Cho tặng", no_notes: "Không có",
+                    contact_seller: "Liên hệ người bán", contact_giver: "Liên hệ người tặng", add_to_cart: "Thêm vào giỏ",
+                    cart_title: "Giỏ hàng của bạn", delivery_info_title: "Thông tin giao hàng",
+                    recipient_name: "Tên người nhận", recipient_phone: "Số điện thoại", recipient_address: "Địa chỉ",
+                    payment_method: "Phương thức thanh toán", payment_cod: "Thanh toán khi nhận hàng (COD)", payment_bank: "Chuyển khoản ngân hàng",
+                    place_order: "Đặt hàng", item_added_to_cart: "Đã thêm sản phẩm vào giỏ hàng!", item_removed_from_cart: "Đã xóa sản phẩm khỏi giỏ hàng.",
+                    order_placed_success: "Đặt hàng thành công! Người bán/tặng sẽ sớm liên hệ với bạn.",
+                    cart_is_empty: "Giỏ hàng của bạn đang trống.",
+                    please_login_cart: "Bạn cần đăng nhập để sử dụng giỏ hàng!",
+                    cannot_add_own_item: "Bạn không thể thêm sản phẩm của chính mình vào giỏ hàng.",
+                    item_in_cart: "Sản phẩm này đã có trong giỏ hàng!",
+                     // Handbook Translations
+                    pregnancy_handbook_title: "Cẩm Nang Thai Kỳ", postpartum_handbook_title: "Cẩm Nang Sau Sinh",
+                    h_mom_name: "Tên mẹ", h_mom_age: "Tuổi mẹ", h_mom_weight_height: "Cân nặng & chiều cao hiện tại (ví dụ: 55kg, 1m6)",
+                    h_lmp_date: "Ngày đầu kỳ kinh cuối", h_mom_history: "Tiền sử thai sản/bệnh lý", h_mom_lifestyle: "Lối sống, thói quen ăn uống",
+                    h_mom_allergies: "Dị ứng thuốc, đồ ăn", h_create_btn: "Tạo cẩm nang", h_baby_info: "Thông tin của bé",
+                    h_baby_name: "Tên bé", h_baby_nickname: "Tên ở nhà", h_baby_dob: "Ngày sinh của bé", h_baby_birth_weight: "Cân nặng lúc sinh (ví dụ: 3.2kg)",
+                    h_baby_birth_order: "Con thứ mấy", h_baby_delivery_method: "Hình thức sinh (ví dụ: Sinh thường, sinh mổ)",
+                    h_baby_vaccines: "Đã tiêm mũi nào, ngày mấy", h_baby_care_wishes: "Mong muốn chăm sóc",
+                    h_mom_info_post: "Thông tin của mẹ (Sau sinh)", h_mom_dob: "Ngày sinh của mẹ", h_mom_health_status: "Tình trạng sức khỏe hiện tại",
+                    h_mom_milk_status: "Tình trạng sữa mẹ", h_mom_feeding_plan: "Mong muốn cho bé bú (ví dụ: Sữa mẹ hoàn toàn)"
                 }
             };
 
             let currentLang = 'vi';
-            const typeText = (element, text) => { if (!element) return; element.innerHTML = ''; let i = 0; const cursor = document.createElement('span'); cursor.className = 'cursor'; cursor.innerHTML = ' '; element.appendChild(cursor); const typing = setInterval(() => { if (i < text.length) { cursor.insertAdjacentText('beforebegin', text.charAt(i)); i++; } else { clearInterval(typing); cursor.style.animation = 'blink 1s infinite'; } }, 50); };
+            const typeText = (element, text) => { if (!element) return; element.innerHTML = ''; let i = 0; const cursor = document.createElement('span'); cursor.className = 'cursor'; cursor.innerHTML = ' '; element.appendChild(cursor); const typing = setInterval(() => { if (i < text.length) { cursor.insertAdjacentText('beforebegin', text.charAt(i)); i++; } else { clearInterval(typing); cursor.style.animation = 'blink 1s infinite'; } }, 50); };
             
             const setLanguage = (lang) => { 
                 currentLang = lang; 
+                document.documentElement.lang = lang;
                 document.querySelectorAll('[data-lang-key]').forEach(el => { 
                     const key = el.dataset.langKey; 
                     const text = translations[lang][key] || ''; 
@@ -625,6 +894,15 @@
                     el.placeholder = text;
                 });
                 document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang)); 
+                
+                // Re-render dynamic content with new language
+                const currentPageId = document.querySelector('body > div[id^="page"]:not(.hidden)')?.id;
+                if (currentPageId === 'page4') displayMilkPosts();
+                if (currentPageId === 'page5') displayProducts();
+                if (currentPageId === 'page9') {
+                    const activeCartType = document.getElementById('product-cart-icon').classList.contains('hidden') ? 'milk' : 'product';
+                    displayCartPage(activeCartType);
+                }
             };
             document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang)));
 
@@ -645,11 +923,16 @@
             // Floating Button & Modals
             const postItemBtn = document.getElementById('post-item-btn');
             
+            // Cart UI Elements
+            const productCartIcon = document.getElementById('product-cart-icon');
+            const milkCartIcon = document.getElementById('milk-cart-icon');
+
             let lastPageId = 'page1';
 
-                       function showPage(pageId, action) {
+            function showPage(pageId, action) {
+                console.log("Hàm showPage được gọi với pageId:", pageId);
                 let currentPageId = document.querySelector('body > div[id^="page"]:not(.hidden)')?.id || lastPageId;
-                if (pageId !== 'page8') { lastPageId = currentPageId; }
+                if (!['page8', 'page9'].includes(pageId)) { lastPageId = currentPageId; }
                 
                 pages.forEach(page => page.classList.add('hidden'));
                 const targetPage = document.getElementById(pageId);
@@ -663,35 +946,35 @@
                     } else { 
                         const existingFooter = targetPage.querySelector('.contact-footer'); 
                         if (existingFooter) existingFooter.remove(); 
-                        if (!['page1', 'page2'].includes(pageId)) { 
+                        if (!['page1', 'page2', 'page8'].includes(pageId)) { 
                             targetPage.appendChild(footerTemplate.content.cloneNode(true)); 
                         } 
                     }
                 }
                 
-                mainHeader.classList.toggle('hidden', ['page1', 'page2', 'page8'].includes(pageId));
+                const showHeader = !['page1', 'page2', 'page8'].includes(pageId);
+                mainHeader.classList.toggle('hidden', !showHeader);
+
+                productCartIcon.classList.toggle('hidden', pageId !== 'page5');
+                milkCartIcon.classList.toggle('hidden', pageId !== 'page4');
+
                 if (floatingChatWidget) floatingChatWidget.classList.toggle('hidden', ['page1', 'page2'].includes(pageId));
                 
                 navLinks.forEach(link => link.classList.toggle('active', link.dataset.target === pageId));
                 window.scrollTo(0, 0);
 
-                // --- START: SỬA LỖI LOGIC ---
                 const isLoggedIn = auth.currentUser;
                 const onContentPage = ['page4', 'page5'].includes(pageId);
                 postItemBtn.classList.toggle('hidden', !isLoggedIn || !onContentPage);
 
                 if (isLoggedIn && onContentPage) {
-                    // SỬA LỖI: Đảm bảo trang nào mở đúng modal của trang đó.
-                    // Trang 4 (sữa) mở modal sữa. Trang 5 (đồ) mở modal đồ.
                     postItemBtn.dataset.modalTarget = (pageId === 'page4') ? 'add-milk-modal' : 'add-item-modal';
                 }
 
-                // SỬA LỖI: Đảm bảo trang nào hiển thị đúng nội dung của trang đó.
-                if (pageId === 'page4') displayMilkPosts(); // Trang 4 hiển thị bài đăng sữa.
-                if (pageId === 'page5') displayProducts();  // Trang 5 hiển thị sản phẩm.
-                // --- END: SỬA LỖI LOGIC ---
+                if (pageId === 'page4') displayMilkPosts();
+                if (pageId === 'page5') displayProducts();
 
-                setLanguage(currentLang); // Refresh language on page change
+                setLanguage(currentLang);
             }
             
             document.getElementById('startButton').addEventListener('click', () => showPage('page2'));
@@ -699,9 +982,9 @@
 
             // --- 5. AUTHENTICATION (from Code 2) ---
             auth.onAuthStateChanged(user => {
+                updateCartBadges();
                 const currentPageId = document.querySelector('body > div[id^="page"]:not(.hidden)')?.id || 'page1';
                 if (user) {
-                    // User is signed in
                     authLinks.classList.add('hidden');
                     userProfile.classList.remove('hidden');
                     userName.textContent = user.displayName || user.email.split('@')[0];
@@ -712,7 +995,6 @@
                         showPage(currentPageId);
                     }
                 } else {
-                    // User is signed out
                     authLinks.classList.remove('hidden');
                     userProfile.classList.add('hidden');
                     postItemBtn.classList.add('hidden');
@@ -722,25 +1004,14 @@
                 }
             });
 
-            logoutBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                auth.signOut().then(() => {
-                    lastPageId = 'page1';
-                    showPage('page1');
-                });
-            });
-
-            const socialLogin = provider => {
-                auth.signInWithPopup(provider).catch(error => alert(`Đăng nhập thất bại: ${error.message}`));
-            };
+            logoutBtn.addEventListener('click', (e) => { e.preventDefault(); auth.signOut().then(() => { lastPageId = 'page1'; showPage('page1'); }); });
+            const socialLogin = provider => { auth.signInWithPopup(provider).catch(error => alert(`Đăng nhập thất bại: ${error.message}`)); };
             document.getElementById('google-login-btn').addEventListener('click', () => socialLogin(googleProvider));
             document.getElementById('facebook-login-btn').addEventListener('click', () => socialLogin(facebookProvider));
             document.getElementById('google-register-btn').addEventListener('click', () => socialLogin(googleProvider));
             document.getElementById('facebook-register-btn').addEventListener('click', () => socialLogin(facebookProvider));
-            
             document.getElementById('login-form').addEventListener('submit', e => { e.preventDefault(); auth.signInWithEmailAndPassword(e.target.email.value, e.target.password.value).catch(err => alert(err.message)); });
             document.getElementById('register-form').addEventListener('submit', e => { e.preventDefault(); auth.createUserWithEmailAndPassword(e.target.email.value, e.target.password.value).catch(err => alert(err.message)); });
-            
             const showLoginBtn = document.getElementById('show-login-btn');
             const showRegisterBtn = document.getElementById('show-register-btn');
             const loginContainer = document.getElementById('login-form-container');
@@ -750,7 +1021,7 @@
             if(showRegisterBtn) showRegisterBtn.addEventListener('click', () => { loginContainer.classList.add('hidden'); registerContainer.classList.remove('hidden'); showLoginBtn.classList.remove('active'); showRegisterBtn.classList.add('active'); });
             if(closeLoginPageBtn) closeLoginPageBtn.addEventListener('click', (e) => { e.preventDefault(); showPage(lastPageId); });
 
-            // --- 6. REAL-TIME DATA & FORMS (from Code 2) ---
+            // --- 6. REAL-TIME DATA & FORMS (UPDATED for translations) ---
             function displayProducts() {
                 const grid = document.getElementById('product-grid');
                 if(!grid) return;
@@ -761,18 +1032,22 @@
                     } else {
                         snapshot.forEach(doc => {
                             const product = doc.data();
-                            const price = product.salePrice && product.salePrice > 0 ? `${Number(product.salePrice).toLocaleString('vi-VN')} VNĐ` : 'Cho tặng';
+                            const productDataString = JSON.stringify({id: doc.id, ...product}).replace(/'/g, "\\'");
+                            const price = product.salePrice && product.salePrice > 0 ? `${Number(product.salePrice).toLocaleString('vi-VN')} VNĐ` : translations[currentLang].for_free;
                             content += `
                                 <div class="item-box">
                                     <div class="item-image" style="background-image: url('${product.imageUrl || 'https://via.placeholder.com/300x250?text=măm'}');"></div>
                                     <div class="item-info">
-                                        <h3 class="item-name">${product.itemName || 'Chưa có tên'}</h3>
+                                        <h3 class="item-name">${product.itemName || translations[currentLang].not_specified}</h3>
                                         <p class="item-price">${price}</p>
                                         <div class="item-details">
-                                            <span><strong>Thương hiệu:</strong> ${product.itemBrand || 'Không rõ'}</span>
-                                            <span><strong>Tình trạng:</strong> ${product.itemCondition || 'Không rõ'}</span>
+                                            <span><strong>${translations[currentLang].label_brand}</strong> ${product.itemBrand || translations[currentLang].not_specified}</span>
+                                            <span><strong>${translations[currentLang].label_condition}</strong> ${product.itemCondition || translations[currentLang].not_specified}</span>
                                         </div>
-                                        <button class="contact-owner-btn" onclick="alert('Liên hệ người bán qua email: ${product.ownerEmail}')">Liên hệ người bán</button>
+                                        <div class="item-actions">
+                                            <button class="action-btn contact-owner-btn" onclick="alert('${translations[currentLang].contact_seller}: ${product.ownerEmail}')">${translations[currentLang].contact_seller}</button>
+                                            <button class="action-btn add-to-cart-btn" onclick='addToCart("product", ${productDataString})'>${translations[currentLang].add_to_cart}</button>
+                                        </div>
                                     </div>
                                 </div>`;
                         });
@@ -791,18 +1066,22 @@
                     } else {
                         snapshot.forEach(doc => {
                             const post = doc.data();
+                            const postDataString = JSON.stringify({id: doc.id, ...post}).replace(/'/g, "\\'");
                             const imageUrl = post.imageUrl || 'https://via.placeholder.com/300x250?text=Sữa+mẹ';
                             content += `
                                 <div class="item-box">
                                     <div class="item-image" style="background-image: url('${imageUrl}');"></div>
                                     <div class="item-info">
-                                        <h3 class="item-name">${post.milkTitle || 'Chưa có tiêu đề'}</h3>
+                                        <h3 class="item-name">${post.milkTitle || translations[currentLang].not_specified}</h3>
                                         <div class="item-details">
-                                            <span><strong>Khu vực:</strong> ${post.milkRegion || 'Không rõ'}</span>
-                                            <span><strong>Ngày trữ:</strong> ${post.storageDate || 'Không rõ'}</span>
-                                            <span><strong>Ghi chú:</strong> ${post.milkNotes || 'Không có'}</span>
+                                            <span><strong>${translations[currentLang].label_region}</strong> ${post.milkRegion || translations[currentLang].not_specified}</span>
+                                            <span><strong>${translations[currentLang].label_storage_date}</strong> ${post.storageDate || translations[currentLang].not_specified}</span>
+                                            <span><strong>${translations[currentLang].label_notes}</strong> ${post.milkNotes || translations[currentLang].no_notes}</span>
                                         </div>
-                                        <button class="contact-owner-btn" onclick="alert('Liên hệ người tặng qua email: ${post.ownerEmail}')">Liên hệ người tặng</button>
+                                        <div class="item-actions">
+                                            <button class="action-btn contact-owner-btn" onclick="alert('${translations[currentLang].contact_giver}: ${post.ownerEmail}')">${translations[currentLang].contact_giver}</button>
+                                            <button class="action-btn add-to-cart-btn" onclick='addToCart("milk", ${postDataString})'>${translations[currentLang].add_to_cart}</button>
+                                        </div>
                                     </div>
                                 </div>`;
                         });
@@ -816,7 +1095,7 @@
                 const targetModal = document.getElementById(modalId);
                 if (targetModal) {
                     targetModal.classList.add('visible');
-                    setLanguage(currentLang); // Ensure modal text is in correct language
+                    setLanguage(currentLang);
                 }
             });
 
@@ -830,20 +1109,14 @@
 
             const handleFormSubmit = async (form, collectionName, fileInputName) => {
                 const user = auth.currentUser;
-                if (!user) {
-                    alert('Bạn cần đăng nhập để đăng tin!');
-                    return;
-                }
-
+                if (!user) { alert('Bạn cần đăng nhập để đăng tin!'); return; }
                 const submitButton = form.querySelector('button[type="submit"]');
                 const originalButtonText = submitButton.textContent;
                 submitButton.disabled = true;
                 submitButton.textContent = 'Đang xử lý...';
-
                 try {
                     const fileInput = form.querySelector(`input[name="${fileInputName}"]`);
                     const file = fileInput ? fileInput.files[0] : null;
-
                     let downloadURL = null;
                     if (file) {
                         const filePath = `${collectionName}/${user.uid}/${Date.now()}_${file.name}`;
@@ -851,37 +1124,21 @@
                         await fileRef.put(file);
                         downloadURL = await fileRef.getDownloadURL();
                     }
-
                     const formData = new FormData(form);
-                    const data = {
-                        ownerId: user.uid,
-                        ownerEmail: user.email,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    };
-                    for (let [key, value] of formData.entries()) {
-                       if (key !== fileInputName) data[key] = value;
-                    }
-                    if (downloadURL) {
-                        data.imageUrl = downloadURL;
-                    }
-
+                    const data = { ownerId: user.uid, ownerEmail: user.email, createdAt: firebase.firestore.FieldValue.serverTimestamp() };
+                    for (let [key, value] of formData.entries()) { if (key !== fileInputName) data[key] = value; }
+                    if (downloadURL) { data.imageUrl = downloadURL; }
                     await db.collection(collectionName).add(data);
                     alert('Đăng tin thành công!');
                     form.reset();
                     form.closest('.modal-overlay').classList.remove('visible');
-                } catch (error) {
-                    console.error("Submit error:", error);
-                    alert(`Đã xảy ra lỗi: ${error.message}`);
-                } finally {
-                    submitButton.disabled = false;
-                    submitButton.textContent = originalButtonText;
-                }
+                } catch (error) { console.error("Submit error:", error); alert(`Đã xảy ra lỗi: ${error.message}`); } 
+                finally { submitButton.disabled = false; submitButton.textContent = originalButtonText; }
             };
             
             document.getElementById('add-item-form').addEventListener('submit', e => { e.preventDefault(); handleFormSubmit(e.target, 'products', 'itemImage'); });
             document.getElementById('add-milk-form').addEventListener('submit', e => { e.preventDefault(); handleFormSubmit(e.target, 'milk_posts', 'milkImage'); });
-
-
+            
             // --- 7. CAROUSEL & OTHER UI LOGIC (from Code 1) ---
             const items = document.querySelectorAll('.carousel-item');
             const prevBtn = document.getElementById('prevBtn');
@@ -913,60 +1170,268 @@
             const chatBox = document.getElementById('chat-messages-box');
             const textInput = document.getElementById('chat-text-input');
             const sendBtn = document.getElementById('send-chat-btn');
-            
-            let chatState = {};
-            let isChatInitialized = false;
-
-            function initializeChat() {
-                chatBox.innerHTML = '';
-                chatState = { conversationStage: 'GREETING', childAge: null, childWeight: null, childHealth: null, originalQuestion: null };
-                displayAIMessage(translations[currentLang].aiGreeting);
-                isChatInitialized = true;
-            }
-
-            if(chatToggleButton) chatToggleButton.addEventListener('click', () => {
-                chatWindow.classList.toggle('visible');
-                if (chatWindow.classList.contains('visible') && !isChatInitialized) { initializeChat(); }
-            });
+            let chatState = {}; let isChatInitialized = false;
+            function initializeChat() { chatBox.innerHTML = ''; chatState = { conversationStage: 'GREETING', childAge: null, childWeight: null, childHealth: null, originalQuestion: null }; displayAIMessage(translations[currentLang].aiGreeting); isChatInitialized = true; }
+            if(chatToggleButton) chatToggleButton.addEventListener('click', () => { chatWindow.classList.toggle('visible'); if (chatWindow.classList.contains('visible') && !isChatInitialized) { initializeChat(); } });
             if(chatCloseButton) chatCloseButton.addEventListener('click', () => { chatWindow.classList.remove('visible'); });
-
             function displayAIMessage(text, isThinking = false) { const msgDiv = document.createElement('div'); msgDiv.className = 'message ai-message'; msgDiv.textContent = text; if(isThinking) { msgDiv.id = 'thinking-message'; } chatBox.appendChild(msgDiv); chatBox.scrollTop = chatBox.scrollHeight; return msgDiv; }
             function displayUserMessage(text) { const userMsgDiv = document.createElement('div'); userMsgDiv.className = 'message user-message'; const textNode = document.createElement('span'); textNode.textContent = text; userMsgDiv.appendChild(textNode); chatBox.appendChild(userMsgDiv); chatBox.scrollTop = chatBox.scrollHeight; }
             function extractInfo(text, regex, group = 1) { const match = text.toLowerCase().match(regex); return match ? match[group] : null; }
-            const handleConversation = (text) => {
-                displayUserMessage(text);
-                switch (chatState.conversationStage) {
-                    case 'GREETING': chatState.originalQuestion = text; displayAIMessage(translations[currentLang].aiAskAge); chatState.conversationStage = 'AWAITING_AGE'; break;
-                    case 'AWAITING_AGE': const age = extractInfo(text, /\b(\d+\s*(?:tháng|tuổi|month|year)s?)\b/); if (age) { chatState.childAge = age; displayAIMessage(translations[currentLang].aiAskWeight); chatState.conversationStage = 'AWAITING_WEIGHT'; } else { displayAIMessage(translations[currentLang].aiInvalidAge); } break;
-                    case 'AWAITING_WEIGHT': const weight = extractInfo(text, /\b(\d+(?:[.,]\d+)?\s*k?g)\b/); if (weight) { chatState.childWeight = weight; displayAIMessage(translations[currentLang].aiAskHealth); chatState.conversationStage = 'AWAITING_HEALTH'; } else { displayAIMessage(translations[currentLang].aiInvalidWeight); } break;
-                    case 'AWAITING_HEALTH':
-                        chatState.childHealth = text; chatState.conversationStage = 'READY_TO_CONSULT';
-                        const fullPrompt = `You are "măm", a helpful, friendly, and caring AI assistant for a Vietnamese website that supports new parents. Your primary language for responding is Vietnamese. Here is the information about the child: - Age: ${chatState.childAge} - Weight: ${chatState.childWeight} - General Health: ${chatState.childHealth}. The parent's original question is: "${chatState.originalQuestion}". Please provide a comprehensive and caring consultation based on this data. Also, suggest 1-2 types of products (like specific foods, vitamins, or toys) that would be appropriate for this child's age and the context of the question. Always end your response with the medical disclaimer: "${translations.vi.aiDisclaimer}"`;
-                        callGeminiAPI(fullPrompt);
-                        break;
-                    case 'READY_TO_CONSULT':
-                        const followupPrompt = `You are "măm", a helpful AI assistant. Remember the child's details: Age is ${chatState.childAge}, Weight is ${chatState.childWeight}, Health is ${chatState.childHealth}. The parent now has a follow-up question: "${text}". Please answer this question based on the child's information you already have. Keep the response helpful and concise. Always end with the disclaimer: "${translations.vi.aiDisclaimer}"`;
-                        callGeminiAPI(followupPrompt);
-                        break;
-                }
-            };
-            const callGeminiAPI = (prompt) => {
-                if (GEMINI_API_KEY === "YOUR_API_KEY_HERE") { displayAIMessage("Lỗi: Vui lòng thay thế 'YOUR_API_KEY_HERE' bằng Gemini API Key của bạn trong mã JavaScript."); return; }
-                const apiURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
-                const requestBody = { "contents": [{ "parts": [{ "text": prompt }] }] };
-                const thinkingMsg = displayAIMessage('...', true);
-                fetch(apiURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) })
-                .then(response => { if (!response.ok) { return response.json().then(errorData => { throw new Error(`API Error: ${response.status}. ${JSON.stringify(errorData)}`); }); } return response.json(); })
-                .then(data => { const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text; if (responseText) { thinkingMsg.textContent = responseText; } else { throw new Error("Invalid response format from API."); } })
-                .catch(error => { console.error('Error calling Gemini API:', error); thinkingMsg.textContent = "Xin lỗi, tôi đang gặp sự cố khi kết nối với AI. Vui lòng thử lại sau."; });
-            };
-
+            const handleConversation = (text) => { displayUserMessage(text); switch (chatState.conversationStage) { case 'GREETING': chatState.originalQuestion = text; displayAIMessage(translations[currentLang].aiAskAge); chatState.conversationStage = 'AWAITING_AGE'; break; case 'AWAITING_AGE': const age = extractInfo(text, /\b(\d+\s*(?:tháng|tuổi|month|year)s?)\b/); if (age) { chatState.childAge = age; displayAIMessage(translations[currentLang].aiAskWeight); chatState.conversationStage = 'AWAITING_WEIGHT'; } else { displayAIMessage(translations[currentLang].aiInvalidAge); } break; case 'AWAITING_WEIGHT': const weight = extractInfo(text, /\b(\d+(?:[.,]\d+)?\s*k?g)\b/); if (weight) { chatState.childWeight = weight; displayAIMessage(translations[currentLang].aiAskHealth); chatState.conversationStage = 'AWAITING_HEALTH'; } else { displayAIMessage(translations[currentLang].aiInvalidWeight); } break; case 'AWAITING_HEALTH': chatState.childHealth = text; chatState.conversationStage = 'READY_TO_CONSULT'; const fullPrompt = `You are "măm", a helpful, friendly, and caring AI assistant for a Vietnamese website that supports new parents. Your primary language for responding is Vietnamese. Here is the information about the child: - Age: ${chatState.childAge} - Weight: ${chatState.childWeight} - General Health: ${chatState.childHealth}. The parent's original question is: "${chatState.originalQuestion}". Please provide a comprehensive and caring consultation based on this data. Also, suggest 1-2 types of products (like specific foods, vitamins, or toys) that would be appropriate for this child's age and the context of the question. Always end your response with the medical disclaimer: "${translations.vi.aiDisclaimer}"`; callGeminiAPI(fullPrompt, chatBox); break; case 'READY_TO_CONSULT': const followupPrompt = `You are "măm", a helpful AI assistant. Remember the child's details: Age is ${chatState.childAge}, Weight is ${chatState.childWeight}, Health is ${chatState.childHealth}. The parent now has a follow-up question: "${text}". Please answer this question based on the child's information you already have. Keep the response helpful and concise. Always end with the disclaimer: "${translations.vi.aiDisclaimer}"`; callGeminiAPI(followupPrompt, chatBox); break; } };
             const sendMessage = () => { const text = textInput.value.trim(); if (text === '') return; handleConversation(text); textInput.value = ''; textInput.focus(); };
             if(sendBtn) sendBtn.addEventListener('click', sendMessage);
             if(textInput) textInput.addEventListener('keypress', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
 
-            // --- 9. INITIALIZE ---
+            // --- 9. CART LOGIC ---
+            function getCart(type) { return JSON.parse(localStorage.getItem(type === 'product' ? 'productCart' : 'milkCart')) || []; }
+            function saveCart(type, cartData) { localStorage.setItem(type === 'product' ? 'productCart' : 'milkCart', JSON.stringify(cartData)); updateCartBadges(); }
+            
+            window.addToCart = (type, itemData) => {
+                const user = auth.currentUser;
+                if (!user) { alert(translations[currentLang].please_login_cart || 'Bạn cần đăng nhập để sử dụng giỏ hàng!'); showPage('page8', 'show-login'); return; }
+                if (user.uid === itemData.ownerId) { alert(translations[currentLang].cannot_add_own_item || 'Bạn không thể thêm sản phẩm của chính mình vào giỏ hàng.'); return; }
+                
+                let cart = getCart(type);
+                if (cart.some(item => item.id === itemData.id)) { alert(translations[currentLang].item_in_cart || 'Sản phẩm này đã có trong giỏ hàng!'); return; }
+                
+                cart.push(itemData);
+                saveCart(type, cart);
+                alert(translations[currentLang].item_added_to_cart);
+            };
+
+            function updateCartBadges() {
+                const productCart = getCart('product');
+                const milkCart = getCart('milk');
+                document.getElementById('product-cart-badge').textContent = productCart.length;
+                document.getElementById('milk-cart-badge').textContent = milkCart.length;
+            }
+
+            function displayCartPage(type) {
+                showPage('page9');
+                const cart = getCart(type);
+                const container = document.getElementById('cart-items-section');
+                const deliverySection = document.getElementById('delivery-info-section');
+                
+                if (cart.length === 0) {
+                    container.innerHTML = `<div class="placeholder-page"><p>${translations[currentLang].cart_is_empty}</p></div>`;
+                     deliverySection.classList.add('hidden');
+                    return;
+                }
+                deliverySection.classList.remove('hidden');
+
+                let content = '';
+                cart.forEach(item => {
+                    const itemName = item.itemName || item.milkTitle || translations[currentLang].not_specified;
+                    const itemPrice = item.salePrice && item.salePrice > 0 ? `${Number(item.salePrice).toLocaleString('vi-VN')} VNĐ` : translations[currentLang].for_free;
+                    const imageUrl = item.imageUrl || 'https://via.placeholder.com/80x80?text=măm';
+                    
+                    content += `
+                        <div class="cart-item" id="cart-item-${item.id}">
+                            <img src="${imageUrl}" alt="${itemName}" class="cart-item-img">
+                            <div class="cart-item-info">
+                                <h4>${itemName}</h4>
+                                <p>${type === 'product' ? itemPrice : ''}</p>
+                            </div>
+                            <i class="fas fa-trash-alt cart-item-remove-btn" onclick="removeFromCart('${type}', '${item.id}')"></i>
+                        </div>
+                    `;
+                });
+                container.innerHTML = content;
+                document.getElementById('delivery-form').dataset.cartType = type;
+            }
+
+            window.removeFromCart = (type, itemId) => {
+                let cart = getCart(type);
+                const updatedCart = cart.filter(item => item.id !== itemId);
+                saveCart(type, updatedCart);
+                alert(translations[currentLang].item_removed_from_cart);
+                displayCartPage(type); 
+            };
+
+            document.querySelectorAll('.header-cart-icon').forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    const type = e.currentTarget.dataset.cartType;
+                    displayCartPage(type);
+                });
+            });
+
+            document.getElementById('delivery-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const type = e.target.dataset.cartType;
+                let cart = getCart(type);
+                if(cart.length === 0) {
+                    alert('Giỏ hàng trống, không thể đặt hàng!');
+                    return;
+                }
+                alert(translations[currentLang].order_placed_success);
+                saveCart(type, []);
+                showPage(type === 'product' ? 'page5' : 'page4'); 
+            });
+
+            // --- 10. NEW: HANDBOOK PAGE LOGIC ---
+            const showPregnancyBtn = document.getElementById('show-pregnancy-handbook-btn');
+            const showPostpartumBtn = document.getElementById('show-postpartum-handbook-btn');
+            const pregnancyFormContainer = document.getElementById('pregnancy-form-container');
+            const postpartumFormContainer = document.getElementById('postpartum-form-container');
+            const handbookResultContainer = document.getElementById('handbook-result-container');
+
+            showPregnancyBtn.addEventListener('click', () => {
+                showPregnancyBtn.classList.add('active');
+                showPostpartumBtn.classList.remove('active');
+                pregnancyFormContainer.classList.remove('hidden');
+                postpartumFormContainer.classList.add('hidden');
+                handbookResultContainer.classList.add('hidden');
+            });
+
+            showPostpartumBtn.addEventListener('click', () => {
+                showPregnancyBtn.classList.remove('active');
+                showPostpartumBtn.classList.add('active');
+                pregnancyFormContainer.classList.add('hidden');
+                postpartumFormContainer.classList.remove('hidden');
+                handbookResultContainer.classList.add('hidden');
+            });
+
+            document.getElementById('pregnancy-handbook-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const momName = document.getElementById('mom-name-preg').value;
+                const momAge = document.getElementById('mom-age-preg').value;
+                const momWeightHeight = document.getElementById('mom-weight-height-preg').value;
+                const lmpDate = document.getElementById('lmp-date').value;
+                const momHistory = document.getElementById('mom-history').value;
+                const momLifestyle = document.getElementById('mom-lifestyle').value;
+                const momAllergies = document.getElementById('mom-allergies').value;
+
+                const prompt = `Bạn là "măm", một trợ lý AI thân thiện và chuyên nghiệp, chuyên tạo cẩm nang thai kỳ cá nhân hóa cho một trang web Việt Nam. Phản hồi của bạn BẮT BUỘC phải bằng tiếng Việt.
+
+Tạo một cẩm nang dưới dạng mục lục chi tiết. Tiêu đề chính của cẩm nang phải là: "Cẩm Nang Thai Kỳ 3 Tháng Đầu của Mẹ ${momName}".
+
+Cẩm nang phải là một hướng dẫn toàn diện cho tam cá nguyệt thứ nhất (3 tháng đầu). Cấu trúc mục lục một cách logic, bao gồm các chủ đề theo tuần hoặc theo các lĩnh vực chính như:
+- Sự phát triển của thai nhi.
+- Thay đổi thể chất và cảm xúc của mẹ.
+- Dinh dưỡng và chế độ ăn uống được đề xuất.
+- Các bài tập được đề nghị.
+- Các cuộc kiểm tra và xét nghiệm quan trọng.
+- Những điều cần tránh.
+- Mẹo quản lý các triệu chứng phổ biến (ốm nghén, mệt mỏi).
+
+Cá nhân hóa lời khuyên dựa trên dữ liệu người dùng sau:
+- Tên mẹ: ${momName}
+- Tuổi: ${momAge}
+- Cân nặng & Chiều cao hiện tại: ${momWeightHeight}
+- Ngày đầu kỳ kinh cuối: ${lmpDate} (sử dụng để ước tính tuổi thai)
+- Tiền sử bệnh lý: ${momHistory || "Không có"}
+- Lối sống: ${momLifestyle || "Không có"}
+- Dị ứng: ${momAllergies || "Không có"}
+
+Trình bày đầu ra dưới dạng một mục lục sạch sẽ, dễ đọc, sử dụng Markdown cho tiêu đề và danh sách.`;
+
+                callGeminiAPI(prompt, handbookResultContainer);
+            });
+
+            document.getElementById('postpartum-handbook-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const babyName = document.getElementById('baby-name').value;
+                const babyNickname = document.getElementById('baby-nickname').value;
+                const babyDob = document.getElementById('baby-dob').value;
+                const babyBirthWeight = document.getElementById('baby-birth-weight').value;
+                const babyBirthOrder = document.getElementById('baby-birth-order').value;
+                const babyDeliveryMethod = document.getElementById('baby-delivery-method').value;
+                const babyVaccines = document.getElementById('baby-vaccines').value;
+                const babyCareWishes = document.getElementById('baby-care-wishes').value;
+                const momName = document.getElementById('mom-name-post').value;
+                const momDob = document.getElementById('mom-dob-post').value;
+                const momHealthStatus = document.getElementById('mom-health-status').value;
+                const momMilkStatus = document.getElementById('mom-milk-status').value;
+                const momFeedingPlan = document.getElementById('mom-feeding-plan').value;
+
+                const prompt = `Bạn là "măm", một trợ lý AI thân thiện và chuyên nghiệp, chuyên tạo cẩm nang sau sinh cá nhân hóa cho một trang web Việt Nam. Phản hồi của bạn BẮT BUỘC phải bằng tiếng Việt.
+
+Tạo một cẩm nang dưới dạng mục lục chi tiết. Tiêu đề chính của cẩm nang phải là: "Cẩm Nang Chăm Sóc Bé ${babyName} 6 Tháng Đầu".
+
+Cẩm nang phải là một hướng dẫn toàn diện cho 6 tháng đầu sau sinh, cho cả mẹ và bé. Cấu trúc mục lục một cách logic, bao gồm các chủ đề theo tháng hoặc theo các lĩnh vực chính như:
+- Cột mốc phát triển của bé (Tháng 1, Tháng 2, v.v.).
+- Hướng dẫn cho ăn (dựa trên mong muốn của mẹ).
+- Lịch trình ngủ.
+- Chăm sóc bé cơ bản (tắm, thay tã).
+- Hướng dẫn lịch tiêm chủng (dựa trên những gì đã được tiêm).
+- Phục hồi sau sinh của mẹ (thể chất và cảm xúc).
+- Hỗ trợ cho con bú (nếu cho con bú).
+- Khi nào cần tham khảo ý kiến bác sĩ (cho mẹ và bé).
+
+Cá nhân hóa lời khuyên dựa trên dữ liệu người dùng sau:
+- Tên bé: ${babyName}, Tên ở nhà: ${babyNickname || "Không có"}
+- Ngày sinh: ${babyDob}, Cân nặng lúc sinh: ${babyBirthWeight}, Con thứ: ${babyBirthOrder}, Hình thức sinh: ${babyDeliveryMethod}
+- Tiêm chủng đã thực hiện: ${babyVaccines || "Chưa có"}
+- Mong muốn chăm sóc bé: ${babyCareWishes || "Chăm sóc tiêu chuẩn"}
+- Tên mẹ: ${momName}, Ngày sinh mẹ: ${momDob}
+- Sức khỏe mẹ: ${momHealthStatus || "Bình thường"}
+- Tình trạng sữa mẹ: ${momMilkStatus}
+- Kế hoạch cho ăn: ${momFeedingPlan}
+
+Trình bày đầu ra dưới dạng một mục lục sạch sẽ, dễ đọc, sử dụng Markdown cho tiêu đề và danh sách.`;
+
+                callGeminiAPI(prompt, handbookResultContainer);
+            });
+            
+            // --- 11. UNIVERSAL API CALLER ---
+            const callGeminiAPI = (prompt, resultContainer) => {
+                // ĐOẠN CODE ĐÚNG
+if (GEMINI_API_KEY === "AIzaSyDTa9lu-HcrhdkiQXHa9-E0Glj_7f6rnRc") {
+    const errorMsg = "Lỗi: Vui lòng thay thế 'YOUR_API_KEY_HERE' bằng Gemini API Key của bạn trong mã JavaScript.";
+    if (resultContainer) { resultContainer.innerHTML = `<p style="color: red;">${errorMsg}</p>`; resultContainer.classList.remove('hidden'); }
+    else { alert(errorMsg); }
+    return;
+}
+
+                if(resultContainer) {
+                    resultContainer.innerHTML = '<div class="loading-spinner"></div>';
+                    resultContainer.classList.remove('hidden');
+                }
+                const thinkingMsg = resultContainer ? null : displayAIMessage('...', true);
+
+                const apiURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
+                const requestBody = { "contents": [{ "parts": [{ "text": prompt }] }] };
+
+                fetch(apiURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) })
+                    .then(response => {
+                        if (!response.ok) { return response.json().then(errorData => { throw new Error(`API Error: ${response.status}. ${JSON.stringify(errorData)}`); }); }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+                        if (responseText) {
+                            if (resultContainer) {
+                                // Simple Markdown to HTML conversion
+                                let html = responseText
+                                    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                                    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                                    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                                    .replace(/^\* (.*$)/gim, '<li>$1</li>')
+                                    .replace(/\*\*(.*)\*\*/g, '<strong>$1</strong>')
+                                    .replace(/\n/g, '<br>');
+                                // Wrap lists
+                                html = html.replace(/<br><li>/g, '<li>').replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>');
+                                html = html.replace(/<\/ul><br><ul>/g, '');
+
+                                resultContainer.innerHTML = html;
+                            } else if (thinkingMsg) {
+                                thinkingMsg.textContent = responseText;
+                            }
+                        } else {
+                            throw new Error("Invalid response format from API.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error calling Gemini API:', error);
+                        const errorText = "Xin lỗi, tôi đang gặp sự cố khi kết nối với AI. Vui lòng thử lại sau.";
+                         if (resultContainer) { resultContainer.innerHTML = `<p style="color: red;">${errorText}</p>`; }
+                         else if (thinkingMsg) { thinkingMsg.textContent = errorText; }
+                    });
+            };
+
+            // --- 12. INITIALIZE ---
             showPage('page1');
+            updateCartBadges(); // Initial badge update on load
         });
     </script>
 </body>

@@ -1389,7 +1389,7 @@ if (GEMINI_API_KEY === "AIzaSyDTa9lu-HcrhdkiQXHa9-E0Glj_7f6rnRc") {
                 }
                 const thinkingMsg = resultContainer ? null : displayAIMessage('...', true);
 
-                const apiURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
+                const apiURL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
                 const requestBody = { "contents": [{ "parts": [{ "text": prompt }] }] };
 
                 fetch(apiURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) })
